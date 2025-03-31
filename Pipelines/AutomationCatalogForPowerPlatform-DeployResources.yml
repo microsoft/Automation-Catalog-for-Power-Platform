@@ -1,0 +1,171 @@
+trigger:
+ branches:
+  include:
+    - develop
+ paths:
+  include:
+    - AutomationCatalogForPowerPlatform
+variables:
+  buildConfiguration: 'Release'
+resources:
+  repositories:
+  - repository: 1ESPipelineTemplates
+    type: git
+    name: 1ESPipelineTemplates/1ESPipelineTemplates
+    ref: refs/tags/release
+parameters:
+  - name: deployResources
+    displayName: Deploy Resources
+    type: boolean
+    default: false
+extends:
+  template: v1/1ES.Unofficial.PipelineTemplate.yml@1ESPipelineTemplates
+  parameters:
+    pool:
+      name: Azure-Pipelines-1ESPT-ExDShared
+      image: windows-2022
+      os: windows
+    customBuildTags:
+    - ES365AIMigrationTooling
+    stages:
+      - ${{ if eq(parameters.deployResources, true) }}:
+          - stage: DeployResources
+            jobs: 
+              - job: DeployResourcesJob
+                steps:
+                  - task: AzureResourceManagerTemplateDeployment@3
+                    displayName: "deploy resources"
+                    name: deployResources
+                    inputs:
+                      azureResourceManagerConnection: $(serviceConnection)
+                      subscriptionId: $(subscriptionId)
+                      resourceGroupName: $(resourceGroupName)
+                      location: $(location)
+                      action: 'Create Or Update Resource Group'
+                      deploymentScope: 'Resource Group'
+                      csmFile: AutomationCatalogForPowerPlatform/ACPP.Client/Infrastructure/template.bicep
+                      overrideParameters: '-resourceGroupName "$(resourceGroupName)" -clientId "$(clientId)" -tenantId "$(tenantId)" -appService "$(appService)" -appServicePlan "$(appServicePlan)" -storageAccount "$(storageAccount)" -applicationInsights "$(applicationInsights)"'
+                      deploymentMode: "Incremental"
+                      deploymentOutputs: dataDeploymentOutputs
+                  - task: PowerShell@2
+                    name: 'SetDeploymentVariables'
+                    displayName: 'Set deployment variables'
+                    inputs:
+                      targetType: 'inline'
+                      script: |
+                        # Get deployment outputs
+                        $deploymentOutputs = '$(dataDeploymentOutputs)'
+                        Write-Output "Deployment Outputs: $deploymentOutputs"
+                        $outputs = ConvertFrom-Json $deploymentOutputs
+                        $appServiceUrl = $outputs.appServiceUrl.value
+                        $appService = $outputs.appService.value
+                        $storageAccountUrl = $outputs.storageAccountUrl.value
+                        $applicationInsightsInstrumentationKey = $outputs.applicationInsightsInstrumentationKey.value
+                        Write-Output $appServiceUrl
+                        Write-Output $appService
+                        Write-Output $storageAccountUrl
+                        Write-Output $applicationInsightsInstrumentationKey
+
+                        echo "##vso[task.setvariable variable=appServiceUrl;isOutput=true;isSecret=false]$appServiceUrl"
+                        echo "##vso[task.setvariable variable=appService;isOutput=true;isSecret=false]$appService"
+                        echo "##vso[task.setvariable variable=storageAccountUrl;isOutput=true;isSecret=false]$storageAccountUrl"
+                        echo "##vso[task.setvariable variable=applicationInsightsInstrumentationKey;isOutput=true;isSecret=false]$applicationInsightsInstrumentationKey"
+                        echo "Variables created successfully"
+      - stage: Build
+        jobs:      
+        - job: API
+          steps:
+          - task: NuGetAuthenticate@1
+          - task: DotNetCoreCLI@2
+            displayName: Build
+            inputs:
+              command: 'build'
+              projects: 'AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj'
+              arguments: '--configuration $(buildConfiguration)'
+          - task: DotNetCoreCLI@2
+            displayName: Test
+            inputs:
+              command: 'test'
+              projects: 'AutomationCatalogForPowerPlatform/ACPP.Tests/ACPP.Tests.csproj'
+              arguments: '--configuration $(buildConfiguration)'
+          - task: DotNetCoreCLI@2
+            displayName: Publish
+            inputs:
+              command: 'publish'
+              publishWebProjects: false
+              projects: 'AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj'
+              arguments: '--configuration $(buildConfiguration) --output "$(build.artifactstagingdirectory)"'
+              zipAfterPublish: false
+          templateContext:
+            outputs:
+            - output: pipelineArtifact
+              targetPath: '$(Build.ArtifactStagingDirectory)'
+              artifact: dropAPI
+
+        - job: UI
+          steps:
+          - task: NodeTool@0
+            displayName: Install Node
+            inputs:
+              versionSource: 'spec'
+              versionSpec: '18.15.x'
+          - task: npmAuthenticate@0
+            displayName: Authenticate
+            inputs:
+              workingFile: 'AutomationCatalogForPowerPlatform/ACPP.Client/.npmrc'
+          - task: Npm@1
+            displayName: Install Packages
+            inputs:
+              command: 'install'
+              workingDir: 'AutomationCatalogForPowerPlatform/ACPP.Client'
+          - task: CmdLine@2
+            displayName: Build
+            inputs:
+              script: 'SET REACT_APP_BUILD_ID=$(Build.BuildNumber)&&npm run build:dev'
+              workingDirectory: 'AutomationCatalogForPowerPlatform/ACPP.Client'
+          - task: CmdLine@2
+            displayName: Copy locales (temp)
+            inputs:
+              script: 'xcopy "src\i18n\locales" "build\static\locales\" /e /s /y'
+              workingDirectory: 'AutomationCatalogForPowerPlatform/ACPP.Client'
+          - task: CopyFiles@2
+            displayName: Copy files
+            inputs:
+              SourceFolder: 'AutomationCatalogForPowerPlatform/ACPP.Client/build'
+              Contents: |
+                **
+                !**\*.map
+              TargetFolder: '$(Build.ArtifactStagingDirectory)/ACPP.Client/ClientApp'
+          templateContext:
+            outputs:
+            - output: pipelineArtifact
+              targetPath: '$(Build.ArtifactStagingDirectory)'
+              artifact: dropUI
+      
+      - stage: DeployCode
+        dependsOn: 
+        - Build
+        condition: succeeded('Build')
+        jobs:
+          - deployment: Deploy
+            displayName: Deploy
+            environment: $(environment)
+            strategy:
+              runOnce:
+                deploy:
+                  steps:
+                  - task: CmdLine@2
+                    displayName: Merge API and UI
+                    inputs:
+                      script: |
+                        xcopy "$(Pipeline.Workspace)\dropAPI\ACPP.API" "$(Build.ArtifactStagingDirectory)\dist\" /e /s 
+                        xcopy "$(Pipeline.Workspace)\dropUI\ACPP.Client\ClientApp" "$(Build.ArtifactStagingDirectory)\dist\ClientApp\" /e /s
+                      workingDirectory: '$(Pipeline.Workspace)'
+                  - task: AzureRmWebAppDeployment@4
+                    displayName: Deploy to Web App
+                    inputs:
+                      ConnectionType: 'AzureRM'
+                      azureSubscription: $(serviceConnection)
+                      appType: 'webApp'
+                      WebAppName: $(appService)
+                      packageForLinux: '$(Build.ArtifactStagingDirectory)/dist'

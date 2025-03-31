@@ -1,0 +1,54 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.9",
+    "id": "00000000-0000-0000-0000-000000000000",
+    "version": "1.0.0",
+    "packageName": "com.daw.automationdashboard",
+    "developer": {
+      "name": "Microsoft",
+      "websiteUrl": "https://apd-webapp-test-isha.azurewebsites.net",
+      "privacyUrl": "https://privacy.microsoft.com/en-US/data-privacy-notice",
+      "termsOfUseUrl": "https://www.microsoft.com/en-us/servicesagreement"
+    },
+    "name": {
+      "short": "Automation Catalog for Power Platform",
+      "full": "Automation Catalog for Power Platform"
+    },
+    "description": {
+      "short": "Find solutions that help you do more by doing less.",
+      "full": "Find solutions that help you do more by doing less. This dashboard shows you solutions built by Microsoft for Microsoft employees to help get things done. Take care of what really matters and automate the rest.  Come back frequently to see the latest updates"
+    },
+    "icons": {
+      "outline": "outline.png",
+      "color": "color.png"
+    },
+    "accentColor": "#D85028",
+    "configurableTabs": [],
+    "staticTabs": [
+      {
+        "entityId": "homeTab",
+        "name": "Home",
+        "contentUrl": "https://apd-webapp-test-isha.azurewebsites.net/StaticContent/hometab/index.html?name={loginHint}&tenant={tid}&theme={theme}",
+        "websiteUrl": "https://apd-webapp-test-isha.azurewebsites.net/StaticContent/hometab/index.html#/tab",
+        "scopes": [
+          "personal"
+        ]
+      }
+    ],
+    "bots": [],
+    "connectors": [],
+    "composeExtensions": [],
+    "permissions": [
+      "identity"
+    ],
+    "validDomains": [
+      "apd-webapp-test-isha.azurewebsites.net"
+    ],
+    "showLoadingIndicator": true,
+    "webApplicationInfo": {
+      "id": "69d5e64f-bcac-476a-a1b6-840e7f824726",
+      "resource": "api://apd-webapp-test-isha.azurewebsites.net/69d5e64f-bcac-476a-a1b6-840e7f824726"
+    },
+    "isFullScreen": true
+  }
+  

@@ -1,0 +1,52 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.16",
+    "version": "1.0.0",
+    "id": "${{TEAMS_APP_ID}}",
+    "packageName": "com.microsoft.teams.automationcatalogforpowerplatform",
+    "developer": {
+        "name": "Teams App, Inc.",
+        "websiteUrl": "${{TAB_ENDPOINT}}",
+        "privacyUrl": "https://aka.ms/privacy",
+        "termsOfUseUrl": "https://aka.ms/terms"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "Automation Catalog for Power Platform-${{TEAMSFX_ENV}}",
+        "full": "Automation Catalog for Power Platform"
+    },
+    "description": {
+        "short": "Find solutions that help you do more by doing less.",
+        "full": "Find solutions that help you do more by doing less. This dashboard shows you solutions built by Microsoft for Microsoft employees to help get things done. Take care of what really matters and automate the rest. Come back frequently to see the latest updates"
+    },
+    "accentColor": "#FFFFFF",
+    "bots": [],
+    "composeExtensions": [],
+    "configurableTabs": [],
+    "staticTabs": [
+        {
+            "entityId": "hometab",
+            "name": "Personal Tab",
+            "contentUrl": "${{TAB_ENDPOINT}}/index.html#/tab?env=${{TEAMSFX_ENV}}",
+            "websiteUrl": "${{TAB_ENDPOINT}}/index.html#/tab",
+            "scopes": [
+                "personal"
+            ]
+        }
+    ],
+    "permissions": [
+        "identity"
+    ],
+    "validDomains": [
+        "${{TAB_DOMAIN}}"
+    ],
+    "webApplicationInfo": {
+        "id": "${{AAD_APP_CLIENT_ID}}",
+        "resource": "api://${{TAB_DOMAIN}}/${{AAD_APP_CLIENT_ID}}"
+    },
+    "showLoadingIndicator": true,
+    "isFullScreen": true
+}
