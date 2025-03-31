@@ -7,6 +7,7 @@ trigger:
     - AutomationCatalogForPowerPlatform
 variables:
   buildConfiguration: 'Release'
+  AppInsightsConnectionString: ''
 resources:
   repositories:
   - repository: 1ESPipelineTemplates
@@ -48,7 +49,7 @@ extends:
                       deploymentMode: "Incremental"
                       deploymentOutputs: dataDeploymentOutputs
                   - task: PowerShell@2
-                    name: 'SetDeploymentVariables'
+                    name: SetDeploymentVariables
                     displayName: 'Set deployment variables'
                     inputs:
                       targetType: 'inline'
@@ -56,21 +57,6 @@ extends:
                         # Get deployment outputs
                         $deploymentOutputs = '$(dataDeploymentOutputs)'
                         Write-Output "Deployment Outputs: $deploymentOutputs"
-                        $outputs = ConvertFrom-Json $deploymentOutputs
-                        $appServiceUrl = $outputs.appServiceUrl.value
-                        $appService = $outputs.appService.value
-                        $storageAccountUrl = $outputs.storageAccountUrl.value
-                        $applicationInsightsInstrumentationKey = $outputs.applicationInsightsInstrumentationKey.value
-                        Write-Output $appServiceUrl
-                        Write-Output $appService
-                        Write-Output $storageAccountUrl
-                        Write-Output $applicationInsightsInstrumentationKey
-
-                        echo "##vso[task.setvariable variable=appServiceUrl;isOutput=true;isSecret=false]$appServiceUrl"
-                        echo "##vso[task.setvariable variable=appService;isOutput=true;isSecret=false]$appService"
-                        echo "##vso[task.setvariable variable=storageAccountUrl;isOutput=true;isSecret=false]$storageAccountUrl"
-                        echo "##vso[task.setvariable variable=applicationInsightsInstrumentationKey;isOutput=true;isSecret=false]$applicationInsightsInstrumentationKey"
-                        echo "Variables created successfully"
       - stage: Build
         jobs:      
         - job: API
@@ -118,10 +104,19 @@ extends:
             inputs:
               command: 'install'
               workingDir: 'AutomationCatalogForPowerPlatform/ACPP.Client'
+          - task: AzureCLI@2
+            displayName: Fetch AI Connection String
+            inputs:
+              azureSubscription: $(serviceConnection)
+              scriptType: bash
+              scriptLocation: inlineScript
+              inlineScript: |
+                connectionString=$(az monitor app-insights component show --app $(applicationInsights) --resource-group $(resourceGroupName) --query connectionString --output tsv)
+                echo "##vso[task.setvariable variable=appInsightsConnectionString]$connectionString"
           - task: CmdLine@2
             displayName: Build
             inputs:
-              script: 'SET REACT_APP_BUILD_ID=$(Build.BuildNumber)&&npm run build:dev'
+              script: 'SET REACT_APP_BUILD_ID=$(Build.BuildNumber)&&SET REACT_APP_TEAMS_APP_ID=$(teamsAppId)&&SET REACT_APP_CLIENT_ID=$(clientId)&&SET REACT_APP_DEFAULT_TOKEN_SCOPE=api://$(appService).azurewebsites.net/$(clientId)&&SET REACT_APP_ADMIN_ENV=$(adminEnvironment)&&SET REACT_APP_FEEDBACK_FORM_URL=$(feedBackFormUrl)&&SET REACT_APP_FAQ_URL=$(faqUrl)&&SET REACT_APP_AI_CONNECTION_STRING=$(AppInsightsConnectionString)&&npm run build:dev'
               workingDirectory: 'AutomationCatalogForPowerPlatform/ACPP.Client'
           - task: CmdLine@2
             displayName: Copy locales (temp)
