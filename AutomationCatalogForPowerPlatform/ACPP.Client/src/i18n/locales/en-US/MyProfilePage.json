@@ -1,0 +1,18 @@
+{
+    "automations": "Automations",
+    "flowUrl": "Action",
+    "h":"h",
+    "hours": "hours",
+    "installed": "Installed",
+    "installedAutomations": "Installed automations",
+    "installationDataPeriod": "Data based on last 30 days",
+    "myProfile": "My Profile",
+    "name": "Name",
+    "noData": "There are no automations installed.",
+    "timeSavings": "Time saved (hours)",
+    "timeSavingsRate": "Savings rate",
+    "totalTimeSavings": "Automated productivity",
+    "saved": "Saved",
+    "rate:": "hours - Rate:",
+    "min": "min /"
+}

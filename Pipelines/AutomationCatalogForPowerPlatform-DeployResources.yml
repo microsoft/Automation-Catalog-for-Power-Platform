@@ -41,11 +41,13 @@ extends:
                       azureResourceManagerConnection: $(serviceConnection)
                       subscriptionId: $(subscriptionId)
                       resourceGroupName: $(resourceGroupName)
+                      catalogPublisherId: $(catalogPublisherId)
+                      catalogEnvUrl: $(catalogEnvUrl)
                       location: $(location)
                       action: 'Create Or Update Resource Group'
                       deploymentScope: 'Resource Group'
-                      csmFile: AutomationCatalogForPowerPlatform/ACPP.Client/Infrastructure/template.bicep
-                      overrideParameters: '-resourceGroupName "$(resourceGroupName)" -clientId "$(clientId)" -tenantId "$(tenantId)" -appService "$(appService)" -appServicePlan "$(appServicePlan)" -storageAccount "$(storageAccount)" -applicationInsights "$(applicationInsights)"'
+                      csmFile: AutomationCatalogForPowerPlatform/ACPP.ClientWithCatalog/Infrastructure/template.bicep
+                      overrideParameters: '-resourceGroupName "$(resourceGroupName)" -clientId "$(clientId)" -tenantId "$(tenantId)" -appService "$(appService)" -appServicePlan "$(appServicePlan)" -storageAccount "$(storageAccount)" -applicationInsights "$(applicationInsights)" -catalogPublisherId "$(catalogPublisherId)" -catalogEnvUrl "$(catalogEnvUrl)"'
                       deploymentMode: "Incremental"
                       deploymentOutputs: dataDeploymentOutputs
                   - task: PowerShell@2
@@ -98,12 +100,12 @@ extends:
           - task: npmAuthenticate@0
             displayName: Authenticate
             inputs:
-              workingFile: 'AutomationCatalogForPowerPlatform/ACPP.Client/.npmrc'
+              workingFile: 'AutomationCatalogForPowerPlatform/ACPP.ClientWithCatalog/.npmrc'
           - task: Npm@1
             displayName: Install Packages
             inputs:
               command: 'install'
-              workingDir: 'AutomationCatalogForPowerPlatform/ACPP.Client'
+              workingDir: 'AutomationCatalogForPowerPlatform/ACPP.ClientWithCatalog'
           - task: AzureCLI@2
             displayName: Fetch AI Connection String
             inputs:
@@ -117,20 +119,20 @@ extends:
             displayName: Build
             inputs:
               script: 'SET REACT_APP_BUILD_ID=$(Build.BuildNumber)&&SET REACT_APP_TEAMS_APP_ID=$(teamsAppId)&&SET REACT_APP_CLIENT_ID=$(clientId)&&SET REACT_APP_DEFAULT_TOKEN_SCOPE=api://$(appService).azurewebsites.net/$(clientId)&&SET REACT_APP_ADMIN_ENV=$(adminEnvironment)&&SET REACT_APP_FEEDBACK_FORM_URL=$(feedBackFormUrl)&&SET REACT_APP_FAQ_URL=$(faqUrl)&&SET REACT_APP_AI_CONNECTION_STRING=$(AppInsightsConnectionString)&&npm run build:dev'
-              workingDirectory: 'AutomationCatalogForPowerPlatform/ACPP.Client'
+              workingDirectory: 'AutomationCatalogForPowerPlatform/ACPP.ClientWithCatalog'
           - task: CmdLine@2
             displayName: Copy locales (temp)
             inputs:
               script: 'xcopy "src\i18n\locales" "build\static\locales\" /e /s /y'
-              workingDirectory: 'AutomationCatalogForPowerPlatform/ACPP.Client'
+              workingDirectory: 'AutomationCatalogForPowerPlatform/ACPP.ClientWithCatalog'
           - task: CopyFiles@2
             displayName: Copy files
             inputs:
-              SourceFolder: 'AutomationCatalogForPowerPlatform/ACPP.Client/build'
+              SourceFolder: 'AutomationCatalogForPowerPlatform/ACPP.ClientWithCatalog/build'
               Contents: |
                 **
                 !**\*.map
-              TargetFolder: '$(Build.ArtifactStagingDirectory)/ACPP.Client/ClientApp'
+              TargetFolder: '$(Build.ArtifactStagingDirectory)/ACPP.ClientWithCatalog/ClientApp'
           templateContext:
             outputs:
             - output: pipelineArtifact
@@ -154,7 +156,7 @@ extends:
                     inputs:
                       script: |
                         xcopy "$(Pipeline.Workspace)\dropAPI\ACPP.API" "$(Build.ArtifactStagingDirectory)\dist\" /e /s 
-                        xcopy "$(Pipeline.Workspace)\dropUI\ACPP.Client\ClientApp" "$(Build.ArtifactStagingDirectory)\dist\ClientApp\" /e /s
+                        xcopy "$(Pipeline.Workspace)\dropUI\ACPP.ClientWithCatalog\ClientApp" "$(Build.ArtifactStagingDirectory)\dist\ClientApp\" /e /s
                       workingDirectory: '$(Pipeline.Workspace)'
                   - task: AzureRmWebAppDeployment@4
                     displayName: Deploy to Web App
