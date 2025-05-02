@@ -210,7 +210,7 @@ namespace ACPP.API.Managers.Implementations
             {
                 string[] scopes = new[] { $"{envUrl ?? _configuration.CatalogEnvUrl}/{_configuration.TokenScope}" };
                 string token = await GetTokenForCatalog(scopes);
-                string queryParameters = $"/?$select=_mspcat_catalogitem_value,createdon,mspcat_templatesuffixid,mspcat_settings,mspcat_environmenturl&$expand=mspcat_CatalogItem($select=mspcat_name,mspcat_tpsid,cr74e_timesavingvalue,cr74e_timesavingtype,cr74e_timesavingunit)&$filter=statuscode eq 526430003 and _mspcat_publisher_value eq {_configuration.PublisherId} and _owninguser_value eq {systemuserid}";
+                string queryParameters = $"/?$select=_mspcat_catalogitem_value,createdon,mspcat_templatesuffixid,mspcat_settings,mspcat_environmenturl&$expand=mspcat_CatalogItem&$filter=statuscode eq 526430003 and _mspcat_publisher_value eq {_configuration.PublisherId} and _owninguser_value eq {systemuserid}";
                 var value = await makeHttpCall(_configuration.TokenScope, token, queryParameters, _configuration.CatalogEnvUrl, _configuration.InstallHistoriesEndPoint, true);
                 if (string.IsNullOrEmpty(value))
                 {

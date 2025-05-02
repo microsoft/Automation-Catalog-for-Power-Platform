@@ -186,7 +186,7 @@ export default function Settings() {
                                     <Trans t={t} i18nKey="pdeDialogMessage" components={[<Link href={config.ppacUrl} target="_blank" />]} />
                                 </p>
                                 <p>
-                                    <Trans t={t} i18nKey="pdeCreationInstructionsMessage" components={[<Link href={config.pdeCreationInstructionsUrl} target="_blank" />]} />
+                                    <Trans t={t} i18nKey="pdeCreationInstructionsMessage" components={[<Link href={config.faqUrl} target="_blank" />]} />
                                 </p>
                             </DialogContent>
                             <DialogActions>

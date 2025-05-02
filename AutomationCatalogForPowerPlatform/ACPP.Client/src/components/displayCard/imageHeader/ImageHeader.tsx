@@ -12,8 +12,8 @@ export const ImageHeader: React.FC<IHeaderProps> = ({ cardData }: IHeaderProps) 
         <div className={mergeClasses(styles.cursorHover, styles.cardHeader)}>
             {/* Display Image in non-small screens */}
             {cardData.cardImageUrl && (
-                <CardPreview className={styles.cardHeaderImage}>
-                    <Image src={cardData.cardImageUrl} alt="Card thumbnail preview" />
+                <CardPreview className={styles.cardImage}>
+                    <Image className={styles.cardHeaderImage} src={cardData.cardImageUrl} alt="Card thumbnail preview" />
                 </CardPreview>
             )}
             {/* Display Icon in small screens */}

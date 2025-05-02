@@ -26,6 +26,9 @@ const AboutPage: React.FC = () => {
           <Text className={styles.body} align="start" data-testid="about-content">
             {t('AboutPage:aboutContent')}
           </Text>
+          <Text className={styles.body} align="start" data-testid="about-build-id">
+            <b>Build Version:</b> {config.buildVersion}
+          </Text>
           <div className={styles.links}>
             {links.map((link, index) => (
               <React.Fragment key={index}>

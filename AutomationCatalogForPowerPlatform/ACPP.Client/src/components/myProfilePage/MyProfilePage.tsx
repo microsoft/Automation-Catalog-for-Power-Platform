@@ -135,7 +135,13 @@ export const MyProfilePage: React.FC = () => {
           ) : userCatalogItemsData?.filter(item => item.solutionId).length ? (
             <>
               <div className={styles.myProfileContainer}>
-                <div className={styles.stats}>
+                <div className={styles.stats}>                  
+                  <div className={styles.statItem}>
+                    <Text className={mergeClasses(styles.statHeader, styles.statHeaderMobile)} aria-label={t('automations')}>{t('automations')}</Text>
+                    <Text className={styles.statNumber} aria-label={`${userCatalogItemsData?.filter(item => item.solutionId).length} automations`}>
+                      {userCatalogItemsData?.filter(item => item.solutionId).length}
+                    </Text>
+                  </div>
                   <div className={styles.statItem}>
                     <Text className={styles.statHeader} aria-label={t('totalTimeSavings')}>{t('totalTimeSavings')}</Text>
                     <div className={styles.statNumberContainer}>
@@ -146,14 +152,7 @@ export const MyProfilePage: React.FC = () => {
                       }
                     </div>
                   </div>
-                  <div className={styles.statItem}>
-                    <Text className={mergeClasses(styles.statHeader, styles.statHeaderMobile)} aria-label={t('automations')}>{t('automations')}</Text>
-                    <Text className={styles.statNumber} aria-label={`${userCatalogItemsData?.filter(item => item.solutionId).length} automations`}>
-                      {userCatalogItemsData?.filter(item => item.solutionId).length}
-                    </Text>
-                  </div>
                 </div>
-                <Text className={styles.installationDataPeriod} aria-label={t('installationDataPeriod')}>{t('installationDataPeriod')}</Text>
                 <Text className={styles.automationsText} aria-label={t('installedAutomations')}>{t('installedAutomations')}</Text>
                 <Table aria-label="Automation details table" className={mergeClasses(styles.text, styles.table)}>
                   {width > screenSizes.md ?
@@ -175,6 +174,7 @@ export const MyProfilePage: React.FC = () => {
                     </div>
                   }
                 </Table>
+                <Text className={styles.installationDataPeriod} aria-label={t('installationDataPeriod')}>{t('installationDataPeriod')}</Text>
               </div>
             </>
           ) : (

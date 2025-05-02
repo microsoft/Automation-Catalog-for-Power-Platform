@@ -1,0 +1,37 @@
+{
+    "modelVersion": "1.0.0.0",
+    "sourcePortal": 526430005,
+    "submissionId": "9f991348-2b8f-4ff6-996c-0f6afd40ae76",
+    "operation": "CreateOrUpdate",
+    "businessJustification": "This is a test by Isha",
+    "publisherDetails": {
+        "publisherId": "cf8b849c-bfcc-ef11-a72e-6045bd052454",
+        "publisherDisplayName": "isha",
+        "publisherUpnList": [],
+        "publisherAADGroupOIDS": []
+    },
+    "catalogItemDefinition": {
+        "id": "369362cb-121b-4725-b99e-292dcd92b951",
+        "displayName": "Test Outlook datasource with flow",
+        "description": "Test Outlook datasource with flow",
+        "offer": {
+            "type": "Component_Collection",
+            "deploymentType": "Template",
+            "helpLink": "https: //www.microsoft.com",
+            "privacyPolicyLink": "https: //www.microsoft.com",
+            "legalTerms": "https: //www.microsoft.com",
+            "engineeringName": {
+                "firstName": "Isha",
+                "lastName": "Gautam",
+                "email": "ishagautam@microsoft.com",
+                "phoneNumber": "222-555-1111"
+            },
+            "supportName": {
+                "firstName": "Isha",
+                "lastName": "Gautam",
+                "email": "ishagautam@microsoft.com",
+                "phoneNumber": "222-555-1111"
+            }
+        }
+    }
+}

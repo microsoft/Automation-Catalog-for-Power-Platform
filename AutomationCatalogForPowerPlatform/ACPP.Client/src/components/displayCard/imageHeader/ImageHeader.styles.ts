@@ -15,8 +15,11 @@ export const useStyles = makeStyles({
             cursor: 'pointer'
         }
     },
-    cardHeaderImage: {
+    cardImage: {
         ...breakpoints.sm({ display: 'none' })
+    },
+    cardHeaderImage: {
+        objectFit: 'cover',
     },
     cardHeaderIcon: {
         ...shorthands.borderRadius('4px'),

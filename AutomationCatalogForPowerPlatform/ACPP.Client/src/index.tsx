@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { Suspense, useCallback, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import AppContainer from './components/appContainer/AppContainer';
 import './index.css';
@@ -113,19 +113,21 @@ const Main = () => {
 
   const renderContent = useCallback(() => {
     return teamsUserCredential ? (
-      <TeamsFxContext.Provider value={{ theme, themeString, teamsUserCredential, context }}>
-        <FluentProvider theme={theme}>
-          <QueryClientProvider client={queryClient}>
-            <AppContext.Provider value={{ appEnv }}>
-              <DeepLinkContext.Provider value={{ ...deepLinkInfo, clearContext: setDeepLinkInfo }} >
-                <LoggerContext.Provider value={{ trackEvent, trackException, setCurrentPage }}>
-                  <AppContainer />
-                </LoggerContext.Provider>
-              </DeepLinkContext.Provider>
-            </AppContext.Provider>
-          </QueryClientProvider>
-        </FluentProvider>
-      </TeamsFxContext.Provider >
+      <Suspense fallback={<CenteredSpinner />}>
+        <TeamsFxContext.Provider value={{ theme, themeString, teamsUserCredential, context }}>
+          <FluentProvider theme={theme}>
+            <QueryClientProvider client={queryClient}>
+              <AppContext.Provider value={{ appEnv }}>
+                <DeepLinkContext.Provider value={{ ...deepLinkInfo, clearContext: setDeepLinkInfo }} >
+                  <LoggerContext.Provider value={{ trackEvent, trackException, setCurrentPage }}>
+                    <AppContainer />
+                  </LoggerContext.Provider>
+                </DeepLinkContext.Provider>
+              </AppContext.Provider>
+            </QueryClientProvider>
+          </FluentProvider>
+        </TeamsFxContext.Provider >
+      </Suspense>
     ) : (
       <CenteredSpinner />
     );

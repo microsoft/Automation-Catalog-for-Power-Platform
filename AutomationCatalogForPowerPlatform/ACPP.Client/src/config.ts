@@ -10,11 +10,11 @@ const appConfig = {
     `https://make.preview.powerapps.com/environments/${pdeId}/catalog?autoPopupCardId=${catalogItemId}&powerappsConnections.enableCustomInputControls=true
 &powerappsPortal.enableAdditionalEnvironmentVariableOptions=true&powerappsPortal.enableOutlookTypeEnvironmentVariables=true
 &powerappsConnections.enableOutlookTypeEnvironmentVariablesInEVPicker=true`,
-  pdeCreationInstructionsUrl: "https://aka.ms/ahfaq#how-to-create-your-own-personal-dev-environment",
   ppacUrl: "https://aka.ms/ppac"
 };
 
 const config = {
+  buildVersion: process.env.REACT_APP_BUILD_ID ? process.env.REACT_APP_BUILD_ID : EMPTY_STRING,
   teamsAppId: process.env.REACT_APP_TEAMS_APP_ID !== '$(teamsAppId)' ? process.env.REACT_APP_TEAMS_APP_ID : EMPTY_STRING,
   clientId: process.env.REACT_APP_CLIENT_ID,
   aiConnectionString: process.env.REACT_APP_AI_CONNECTION_STRING,

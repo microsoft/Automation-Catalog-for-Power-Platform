@@ -81,7 +81,7 @@ export const useStyles = makeStyles({
         color: tokens.colorNeutralForeground1,
         fontSize: '74px',
         fontWeight: 400,
-        margin: '40px 0 0 8px',
+        margin: '40px 0 0 3px',
         alignSelf: 'stretch',
         ...breakpoints.md({
             fontSize: '61px',
@@ -91,7 +91,7 @@ export const useStyles = makeStyles({
         fontSize: '26px',
         fontStyle: 'normal',
         fontWeight: 700,
-        margin: '60px 0 0 3px',
+        margin: '60px 0 0 18px',
         ...breakpoints.md({
             fontSize: '61px',
             fontWeight: 400,
@@ -113,14 +113,14 @@ export const useStyles = makeStyles({
         fontStyle: 'normal',
         fontWeight: 400,
         lineHeight: '20px',
-        margin: '20px 0 20px 8px',
+        margin: '24px 0 10px 15px',
         color: tokens.colorNeutralForeground3,
     },
     automationsText: {
         color: tokens.colorNeutralForeground1,
         fontSize: '18px',
         fontWeight: 500,
-        margin: '0 0 15px 8px',
+        margin: '18px 0 15px 8px',
     },
     table:{
         maxWidth:'90%',
