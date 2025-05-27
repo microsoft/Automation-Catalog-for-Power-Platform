@@ -1,0 +1,41 @@
+{
+    "modelVersion": "1.0.0.0",
+    "sourcePortal": 526430005,
+    "submissionId": "9f991348-2b8f-4ff6-996c-0f6afd40ae19",
+    "operation": "CreateOrUpdate",
+    "businessJustification": "Automation Catalog for Power Platform",
+    "publisherDetails": {
+        "publisherId": "<PUBLISHER ID>",
+        "publisherDisplayName": "<PUBLISHER NAME>",
+        "publisherUpnList": [],
+        "publisherAADGroupOIDS": []
+    },
+    "catalogItemDefinition": {
+        "id": "369362cb-121b-4725-b99e-292dcd92b919",
+        "displayName": "Schedule Focus Time Last",
+        "description": "Ensure you get enough focus time while reducing scheduling conflicts by scheduling focus time last.",
+        "offer": {
+            "type": "Component_Collection",
+            "deploymentType": "Template",
+            "helpLink": "https: //www.microsoft.com",
+            "privacyPolicyLink": "https: //www.microsoft.com",
+            "legalTerms": "https: //www.microsoft.com",
+            "engineeringName": {
+                "firstName": "<FIRST NAME>",
+                "lastName": "<LAST NAME>",
+                "email": "<EMAIL>",
+                "phoneNumber": "<PHONE NUMBER>"
+            },
+            "supportName": {
+                "firstName": "<FIRST NAME>",
+                "lastName": "<LAST NAME>",
+                "email": "<EMAIL>",
+                "phoneNumber": "<PHONE NUMBER>"
+            },
+            "small48x48Image": {
+                "name": "Small48Image",
+                "fileSasLink": "https://imageassetssa.z5.web.core.windows.net/images/calendar.png"      
+             }
+        }
+    }
+}

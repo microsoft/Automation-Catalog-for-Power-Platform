@@ -10,7 +10,6 @@ namespace ACPP.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [AllowAnonymous]
     public class CatalogItemsController : ControllerBase
     {
         private readonly ILogger<CatalogItemsController> _logger;
@@ -54,6 +53,10 @@ namespace ACPP.API.Controllers
         public async Task<List<InstalledSolutionTemplateCardModel>> GetUserCatalogItems(string? envUrl)
         {
             string userId = TokenHelper.GetUserId(HttpContext.User.Identity);
+            if (userId == null)
+            {
+                throw new Exception("Error getting user ID");
+            }
             string systemUserId = await _catalogDataManager.GetSystemUserId(envUrl, userId);
             List<InstalledSolutionTemplateCardModel> result = await _catalogDataManager.GetUserItems(envUrl, systemUserId);
             if (result == null)

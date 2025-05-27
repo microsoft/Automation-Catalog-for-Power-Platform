@@ -68,6 +68,9 @@ export const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     ...shorthands.margin('0%', '1%', '0%', '2%'),
+    ...breakpoints.lg({
+    ...shorthands.margin('0%', '1%', '0%', '4%'),
+    }),
   },
   bodyBox: {
     display: 'flex',
@@ -77,15 +80,19 @@ export const useStyles = makeStyles({
       flexDirection: 'column-reverse',
     }),
   },
+  bodyMain:{
+    flex: 1,
+  },
   bodyDescription: {
     textAlign: "left",
     fontSize: "14px",
     lineHeight: "20px",
-    width: "100%",
+    width: "70%",
     ...shorthands.margin('3%', '0%', '3%', '0%'),
     ...breakpoints.md({
       maxWidth: "100%",
       minWidth: "20%",
+      width: "100%",
     }),
   },
   installedItemButton: {
@@ -97,6 +104,20 @@ export const useStyles = makeStyles({
   bodyImage: {
     ...shorthands.borderRadius(tokens.borderRadiusSmall),
     width: '45%',
+    height: "fit-content",
+    alignSelf: "center",
+    ...breakpoints.lg({
+      ...shorthands.margin('2%', '0%', '0%', '0%'),
+      width: '70%',
+    }),
+    ...breakpoints.md({
+      display: 'none',
+    }),
+  },
+  bodyImageIsFeatured:{
+    ...shorthands.borderRadius(tokens.borderRadiusSmall),
+    width: '20%',
+    margin: '10px',
     height: "fit-content",
     alignSelf: "center",
     ...breakpoints.lg({

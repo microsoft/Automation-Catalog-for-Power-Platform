@@ -5,15 +5,18 @@ namespace ACPP.API.Utilities
 {
     public class TokenHelper
     {
-        //const string _OIDclaimType = "http://schemas.microsoft.com/identity/claims/objectidentifier";
-        //const string _UPNclaimType = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/upn";
         const string _OIDclaimType = "oid";
-        const string _UPNclaimType = "upn";
+        const string _OIDclaimType_1 = "http://schemas.microsoft.com/identity/claims/objectidentifier";
+        
 
         public static string GetClaim(IIdentity identity, string claimType)
         {
             var claimsIdentity = GetClaimsIdentity(identity);
             var claim = claimsIdentity.Claims.FirstOrDefault(c => c.Type == claimType);
+            if (claim == null)
+            {
+                claim = claimsIdentity.Claims.FirstOrDefault(c => c.Type == _OIDclaimType_1);
+            }
             return claim?.Value;
         }
 
@@ -21,13 +24,6 @@ namespace ACPP.API.Utilities
         {
             var claimsIdentity = GetClaimsIdentity(identity);
             var claim = claimsIdentity.Claims.FirstOrDefault(c => c.Type == _OIDclaimType);
-            return claim?.Value;
-        }
-
-        public static string GetUPN(IIdentity identity)
-        {
-            var claimsIdentity = GetClaimsIdentity(identity);
-            var claim = claimsIdentity.Claims.FirstOrDefault(c => c.Type == _UPNclaimType);
             return claim?.Value;
         }
 

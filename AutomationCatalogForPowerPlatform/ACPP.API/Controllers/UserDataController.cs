@@ -30,7 +30,7 @@ namespace ACPP.API.Controllers
         {
             _logger.LogInformation("GetUserDetails called");
             string userId = TokenHelper.GetUserId(HttpContext.User.Identity);
-            UserDetails userDetails = null;//await _userManager.GetUserDetails(userId);
+            UserDetails userDetails = await _userManager.GetUserDetails(userId);
             if (userDetails == null)
             {
                 userDetails = await _userManager.AddNewUser(userId);

@@ -8,13 +8,12 @@ using ACPP.API.Services.Implementations;
 using ACPP.API.Services.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
-using Microsoft.Identity.ServiceEssentials.Extensions.AspNetCoreMiddleware;
-using Microsoft.IdentityModel.S2S.Extensions.AspNetCore;
+using Microsoft.Identity.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddAuthentication(S2SAuthenticationDefaults.AuthenticationScheme)
-    .AddMiseWithDefaultAuthentication(builder.Configuration);
+
+builder.Services.AddMicrosoftIdentityWebApiAuthentication(builder.Configuration); 
 
 builder.Services.AddAuthorization();
 

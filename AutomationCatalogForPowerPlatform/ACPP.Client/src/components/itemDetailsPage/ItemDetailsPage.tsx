@@ -180,7 +180,7 @@ export const ItemDetailsPage: React.FC = () => {
                                     <Text className={styles.subtitleTextRight} data-testid="item-timeSavingsFrequency">{cardData?.cardFrequency.toLocaleLowerCase()}</Text>
                                 </div> */}
                                 <div className={styles.bodyBox}>
-                                    <div>
+                                    <div className={styles.bodyMain}>
                                         <>
                                             <div className={styles.bodyDescription} data-testid="item-longDescription" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(cardData?.cardDescription) }} />
                                             {userCatalogItemsData?.filter(item => item.solutionId).some(item => item.mspcat_CatalogItem.solutionName === cardData.cardTitle) ?
@@ -204,12 +204,12 @@ export const ItemDetailsPage: React.FC = () => {
                                     }
                                         </>
                                     </div>
-                                    {!!cardData?.cardVideoUrl ?
+                                    {cardData?.cardVideoUrl ?
                                         <video controls className={styles.bodyVideo}>
                                             <source src={cardData?.cardVideoUrl} type="video/mp4" />
                                         </video>
                                         :
-                                        <img alt={cardData?.cardImageUrl} src={cardData?.cardImageUrl} className={styles.bodyImage} data-testid="item-imageUrl" />
+                                        <img alt={cardData?.cardImageUrl} src={cardData?.cardImageUrl} className={cardData?.isFeatured ? styles.bodyImageIsFeatured : styles.bodyImage} data-testid="item-imageUrl" />
                                     }
                                 </div>
                             </div>
