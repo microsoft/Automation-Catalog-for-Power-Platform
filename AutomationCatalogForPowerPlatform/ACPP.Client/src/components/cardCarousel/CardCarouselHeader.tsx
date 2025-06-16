@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { CardCarouselHeaderProps } from "./CardCarouselHeaderProps";
 import { ChevronLeft12Filled, ChevronLeft12Regular, ChevronRight12Filled, ChevronRight12Regular, bundleIcon } from "@fluentui/react-icons";
 import { Button } from "@fluentui/react-button";

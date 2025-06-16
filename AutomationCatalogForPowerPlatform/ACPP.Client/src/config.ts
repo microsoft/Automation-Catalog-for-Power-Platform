@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { EMPTY_STRING } from "./common/helpers/Constants";
 
 const appConfig = {
@@ -29,3 +32,4 @@ const config = {
 };
 
 export default config;
+

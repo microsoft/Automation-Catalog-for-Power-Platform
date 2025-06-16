@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { SolutionTemplateCard } from '../../common/models/SolutionTemplateCard';
 
 // Interface to define the properties for the VisualCard component

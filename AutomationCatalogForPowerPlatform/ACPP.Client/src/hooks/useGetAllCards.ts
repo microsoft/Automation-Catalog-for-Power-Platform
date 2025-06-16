@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { useQuery } from 'react-query';
 import { useAuth } from './useAuthenticatedClient';
 import config from '../config';
@@ -21,3 +24,4 @@ export const useGetAllCards = (appEnv: string) => {
         { refetchOnWindowFocus: false, retry: false, staleTime: Infinity, cacheTime: Infinity },
     );
 };
+

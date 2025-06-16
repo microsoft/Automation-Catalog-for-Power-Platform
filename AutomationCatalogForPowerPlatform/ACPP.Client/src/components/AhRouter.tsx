@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { useRoutes } from 'react-router-dom';
 import { HomePage } from './homePage/HomePage';
 import SearchPage from './searchPage/SearchPage';
@@ -47,3 +50,4 @@ export const AHRouter = () => {
     }
   ]);
 };
+

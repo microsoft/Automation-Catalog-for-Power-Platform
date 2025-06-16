@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { ApplicationInsights } from "@microsoft/applicationinsights-web";
 import { ITeamsTabInfo, ITelemetry, SeverityLevel } from "../common/models/LoggingServiceTypes";
 import config from "../config";

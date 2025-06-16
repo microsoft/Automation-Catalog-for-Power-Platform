@@ -1,4 +1,7 @@
-﻿using ACPP.API.Cache;
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
+using ACPP.API.Cache;
 using ACPP.API.Configuration;
 using ACPP.API.Providers.Interfaces;
 using Azure.Core;

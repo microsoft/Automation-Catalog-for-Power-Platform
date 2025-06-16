@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { useMutation } from 'react-query';
 import { useAuth } from "./useAuthenticatedClient";
 import config from '../config';
@@ -17,3 +20,4 @@ export const useUpdateLastVisitTime = () => {
         { retry: false },
     );
 };
+

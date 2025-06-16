@@ -1,4 +1,7 @@
-﻿namespace ACPP.API.Constants
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
+namespace ACPP.API.Constants
 {
     public static class ApplicationConstants
     {
@@ -44,3 +47,4 @@
 
     }
 }
+

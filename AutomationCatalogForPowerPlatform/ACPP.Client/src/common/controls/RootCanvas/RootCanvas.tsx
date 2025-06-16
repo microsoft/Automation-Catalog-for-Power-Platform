@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { IRootCanvasProps } from "./IRootCanvasProps";
 import { useStyles } from "./RootCanvas.styles";
 

@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 /// <reference types="jest" />
 
 import { fireEvent, screen, waitFor } from '@testing-library/react';
@@ -56,3 +59,4 @@ describe('SearchPage Component', () => {
     });
   });
 });
+

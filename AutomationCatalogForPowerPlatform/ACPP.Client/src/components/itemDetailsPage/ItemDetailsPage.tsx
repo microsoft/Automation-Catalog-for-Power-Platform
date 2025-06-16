@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import DOMPurify from 'dompurify';
 // import IdeaSubmission from '../ideaSubmission/IdeaSubmission';
 import { useCallback, useContext, useEffect, useState } from 'react';

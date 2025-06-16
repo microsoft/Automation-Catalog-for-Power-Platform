@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 interface mspcat_CatalogItem {
     solutionTemplateUniqueId: string;
     solutionTemplateVersionId: string;

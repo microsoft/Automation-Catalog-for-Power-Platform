@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 /**
  * Enum for representing the types of events.
  */
@@ -83,3 +86,4 @@ export interface IUTPService {
   /** Function to track exceptions. */
   TrackException: (error: any, severityLevel?: any, otherData?: ITelemetry) => void;
 }
+

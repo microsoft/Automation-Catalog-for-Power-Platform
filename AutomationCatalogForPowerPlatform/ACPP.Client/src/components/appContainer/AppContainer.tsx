@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BrowserRouter } from 'react-router-dom';
@@ -94,3 +97,4 @@ const _AppContainer = () => {
 }
 
 export default withErrorBoundary(_AppContainer);
+

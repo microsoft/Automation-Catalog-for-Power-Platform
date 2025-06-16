@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { CardPreview } from '@fluentui/react-card';
 import { Image } from '@fluentui/react-image';
 import { IHeaderProps } from '../IHeaderProps';

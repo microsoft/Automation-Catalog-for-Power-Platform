@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 // import { SolutionTemplateCard } from "../common/models/SolutionTemplateCard";
 export const data = "data";
 // export const mockCardData1: SolutionTemplateCard = {
@@ -132,3 +135,4 @@ export const data = "data";
 //     cardImageUrl: "https://imageassetssa.z5.web.core.windows.net/images/detailedViewPlaceholder.png",
 //     cardVideoUrl: "video.com",
 // }];
+

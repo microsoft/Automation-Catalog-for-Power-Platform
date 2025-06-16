@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { makeStyles, shorthands, tokens } from '@fluentui/react-components';
 import { Direction } from './Drawer';
 
@@ -72,3 +75,4 @@ export const getDirectionStyle = (dir: Direction, size: number): React.CSSProper
       return {};
   }
 };
+

@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import React, { useRef, useEffect, useMemo, useState } from 'react';
 import { getDirectionStyle, useStyles } from './Drawer.styles';
 
@@ -125,3 +128,4 @@ const Drawer: React.FC<DrawerProps> = ({
 };
 
 export default Drawer;
+

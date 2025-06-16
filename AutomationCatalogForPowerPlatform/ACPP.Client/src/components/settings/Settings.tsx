@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { Button, Input, Label, Title1, Link, Switch, Subtitle1, Field, Dialog, DialogActions, DialogBody, DialogContent, DialogSurface, DialogTitle, DialogTrigger } from "@fluentui/react-components";
 import { ChevronLeftFilled } from '@fluentui/react-icons';
 import { DisplayCanvas } from "../../common/controls/DisplayCanvas/DisplayCanvas";

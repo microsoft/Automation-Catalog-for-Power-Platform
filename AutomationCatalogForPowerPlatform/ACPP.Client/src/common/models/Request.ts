@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 /**
  * Represents a sort property for sorting results.
  * @interface SortProperty
@@ -49,3 +52,4 @@ export enum HTTP_STATUS_CODES {
    */
   INTERNAL_SERVER_ERROR = 500,
 }
+

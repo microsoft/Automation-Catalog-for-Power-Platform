@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { UserCatalogItems } from "../common/models/UserCatalogItems";
 
 export const mockUserCatalogItems: UserCatalogItems[] = [

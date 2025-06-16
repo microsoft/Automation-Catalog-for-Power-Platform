@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -44,3 +47,4 @@ export const MoreCardMenuItems: React.FC<IMoreCardMenuProps> = ({ className, car
         <MenuItem icon={<PhotoFilterIcon />} className={className} onClick={() => { navigate('/Search', { state: { queryText: "", selectedCategories: [cardData.cardCategory] } }) }}>{t('relatedItems')}</MenuItem>
     </>)
 }
+

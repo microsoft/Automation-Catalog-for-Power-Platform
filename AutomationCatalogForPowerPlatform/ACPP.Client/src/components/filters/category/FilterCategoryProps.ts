@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 /**
  * Represents the props for a filter category component.
  * @interface FilterCategoryProps
@@ -30,3 +33,4 @@ export interface FilterCategoryBaseProps {
    */
   loading?: boolean;
 }
+

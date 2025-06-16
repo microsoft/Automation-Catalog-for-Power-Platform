@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 /**
  * Represents the properties for the IdeaSubmission component.
  * @interface IdeaSubmissionProps
@@ -8,3 +11,4 @@ export interface IdeaSubmissionProps {
    */
   className?: string;
 }
+

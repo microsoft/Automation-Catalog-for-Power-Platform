@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { screen, fireEvent } from '@testing-library/react';
 import { renderWithProviders } from '../../test/test-utils';
 import IdeaSubmission from './IdeaSubmission';
@@ -39,3 +42,4 @@ describe('IdeaSubmission Component', () => {
     expect(inAppFeedbackDialog).toBeInTheDocument();
   });
 });
+

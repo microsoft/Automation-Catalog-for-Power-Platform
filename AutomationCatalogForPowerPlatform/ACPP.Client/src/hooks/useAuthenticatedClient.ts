@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { BearerTokenAuthProvider, TeamsUserCredential, createApiClient } from '@microsoft/teamsfx';
 import { TeamsFxContext } from '../common/contexts/TeamsFxContext';
 import { useContext, useMemo } from 'react';
@@ -41,3 +44,4 @@ export const useAuth = (baseUrl: string, scope?: string) => {
     }, [baseUrl, scope]);
     return [httpClient];
 }
+

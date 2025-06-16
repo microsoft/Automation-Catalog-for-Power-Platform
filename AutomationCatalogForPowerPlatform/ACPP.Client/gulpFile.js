@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 const gulp = require("gulp");
 const jeditor = require("gulp-json-editor");
 const minimist = require('minimist');
@@ -48,3 +51,4 @@ gulp.task('symlink-locales', function (done) {
         done();
     });
 });
+

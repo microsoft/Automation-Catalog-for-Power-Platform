@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 // Interface to define the structure of a card info object
 export interface Card {
     // Unique name of the card

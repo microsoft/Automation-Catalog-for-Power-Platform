@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { SortProperty } from './Request';
 import { SolutionTemplateCard } from './SolutionTemplateCard';
 
@@ -40,3 +43,4 @@ export interface CategoryCard {
   categoryTitle: string;
   cards: SolutionTemplateCard[];
 }
+

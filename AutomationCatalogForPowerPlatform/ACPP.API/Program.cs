@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 using ACPP.API.Cache;
 using ACPP.API.Configuration;
 using ACPP.API.Managers.Implementations;
@@ -100,3 +103,4 @@ app.UseStaticFiles(new StaticFileOptions
 });
 
 app.Run();
+

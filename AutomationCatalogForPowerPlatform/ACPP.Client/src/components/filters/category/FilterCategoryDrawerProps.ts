@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { MenuCheckedValueChangeData, MenuCheckedValueChangeEvent } from '@fluentui/react-components';
 
 /**
@@ -47,3 +50,4 @@ export interface FilterCategoryDrawerProps {
    */
   enableDeselectAll: boolean;
 }
+

@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { makeStyles, shorthands } from "@fluentui/react-components";
 import { CARD_CAROUSEL_GAP } from "../../common/helpers/Constants";
 

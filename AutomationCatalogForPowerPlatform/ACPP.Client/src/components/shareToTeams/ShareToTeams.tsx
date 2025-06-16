@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -90,3 +93,4 @@ export const ShareToTeamsMenuItems: React.FC<IShareToTeamsProps & { fromDrawer?:
   </>
   )
 };
+

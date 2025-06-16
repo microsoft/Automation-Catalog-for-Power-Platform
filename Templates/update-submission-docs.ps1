@@ -1,3 +1,6 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
 # Prompt user for input values
 $publisherId = Read-Host "Enter value for PublisherId"
 $publisherDisplayName = Read-Host "Enter value for PublisherDisplayName"

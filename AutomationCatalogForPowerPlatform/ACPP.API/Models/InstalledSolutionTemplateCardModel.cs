@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json;
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
+using Newtonsoft.Json;
 
 namespace ACPP.API.Models
 {
@@ -57,3 +60,4 @@ namespace ACPP.API.Models
         public string TimeSavingUnit { get; set; }
     }
 }
+

@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { useCallback, useContext, useEffect, useMemo } from 'react';
 import { Menu, MenuItem, MenuList, MenuPopover, MenuTrigger, Text } from '@fluentui/react-components';
 import { MoreHorizontal24Regular, PersonFeedback24Regular, QuestionCircle24Regular, Settings24Regular } from '@fluentui/react-icons';
@@ -198,3 +201,4 @@ export default function Navbar() {
     </div>
   );
 }
+

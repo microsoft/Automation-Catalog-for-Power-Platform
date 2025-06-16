@@ -1,4 +1,7 @@
-﻿namespace ACPP.API.Configuration
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
+namespace ACPP.API.Configuration
 {
     public class DataverseConfiguration
     {
@@ -30,3 +33,4 @@
         public string PublisherId { get; set; }
     }
 }
+

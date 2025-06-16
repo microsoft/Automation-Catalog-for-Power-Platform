@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { useTranslation } from 'react-i18next';
 
 import { Image, mergeClasses, Tag } from '@fluentui/react-components';
@@ -30,3 +33,4 @@ export const IconHeader: React.FC<IHeaderProps> = ({ cardData, userCatalogItemsD
         </div >
     );
 };
+

@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { SolutionTemplateCard } from "../../common/models/SolutionTemplateCard";
 
 /**
@@ -11,3 +14,4 @@ export interface CategoriesProps {
   className?: string;
   cards: SolutionTemplateCard[];
 }
+

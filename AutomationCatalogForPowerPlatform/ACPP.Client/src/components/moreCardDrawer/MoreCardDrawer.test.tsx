@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 // import { fireEvent, screen, within } from '@testing-library/react';
 
 // import { mockCardData1 } from '../../mockData/mockData';

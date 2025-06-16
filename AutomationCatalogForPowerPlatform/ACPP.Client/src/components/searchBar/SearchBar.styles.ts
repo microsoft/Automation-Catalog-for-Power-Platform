@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { makeStyles, tokens } from '@fluentui/react-components';
 import breakpoints from '../../common/helpers/Breakpoints';
 

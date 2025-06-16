@@ -1,4 +1,7 @@
-﻿namespace ACPP.API.Models
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
+namespace ACPP.API.Models
 {
     public class UserDetails : UserPreferences
     {
@@ -11,3 +14,4 @@
 
     }
 }
+

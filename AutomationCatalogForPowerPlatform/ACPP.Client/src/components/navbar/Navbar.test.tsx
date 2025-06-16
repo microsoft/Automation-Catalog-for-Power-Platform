@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { screen, fireEvent, within } from '@testing-library/react';
 import Navbar from './Navbar';
 import { renderWithProviders } from '../../test/test-utils';
@@ -60,3 +63,4 @@ describe('Navbar', () => {
     expect(window.location.pathname).toBe('/Settings');
   });
 });
+

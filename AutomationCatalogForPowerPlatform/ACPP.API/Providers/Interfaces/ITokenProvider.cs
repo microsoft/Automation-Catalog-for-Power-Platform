@@ -1,4 +1,7 @@
-﻿namespace ACPP.API.Providers.Interfaces
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
+namespace ACPP.API.Providers.Interfaces
 {
     public interface ITokenProvider
     {

@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import React from 'react';
 
 import { Divider, LargeTitle, Link, Text } from '@fluentui/react-components';
@@ -46,3 +49,4 @@ const AboutPage: React.FC = () => {
 };
 
 export default AboutPage;
+

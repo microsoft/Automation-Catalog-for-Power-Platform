@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { useQuery } from 'react-query';
 import { useAuth } from "../hooks/useAuthenticatedClient";
 import config from '../config';
@@ -16,3 +19,4 @@ export const useGetUserCatalogItems = (appEnv: string) => {
         { refetchOnWindowFocus: false, retry: false, staleTime: Infinity, cacheTime: Infinity },
     );
 };
+

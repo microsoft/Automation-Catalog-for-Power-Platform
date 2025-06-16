@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { fireEvent, screen } from '@testing-library/react';
 import { renderWithProviders } from '../../../test/test-utils';
 import FilterCategoryDrawer from './FilterCategoryDrawer';
@@ -108,3 +111,4 @@ describe('FilterCategoryDrawer Component', () => {
     expect(mockToggleDrawer).toHaveBeenCalled();
   });
 });
+
