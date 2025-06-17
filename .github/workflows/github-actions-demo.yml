@@ -61,6 +61,97 @@ jobs:
             applicationInsights: AiSg1
             catalogPublisherId: fb31ecb7-e51e-f011-998a-000d3a8040d2
             catalogEnvUrl: https://org028f6349.api.crm5.dynamics.com/
+  build-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4.3.1
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Build API
+        run: dotnet build AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj --configuration ${{ env.buildConfiguration }}
+
+      - name: Publish API
+        run: dotnet publish AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj --configuration ${{ env.buildConfiguration }} --output ${{ github.workspace }}/dropAPI
+
+      - name: Upload API Artifact
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: dropAPI
+          path: ${{ github.workspace }}/dropAPI
+
+  build-ui:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4.4.0
+        with:
+          node-version: '18.15.x'
+
+      - name: Install Packages
+        run: npm install
+        working-directory: AutomationCatalogForPowerPlatform/ACPP.Client
+
+      - name: Build UI
+        run: |
+          set REACT_APP_BUILD_ID=${{ github.run_number }}
+          set REACT_APP_TEAMS_APP_ID=${{ secrets.TEAMS_APP_ID }}
+          set REACT_APP_CLIENT_ID=${{ secrets.CLIENT_ID }}
+          set REACT_APP_DEFAULT_TOKEN_SCOPE=api://${{ secrets.APP_SERVICE }}.azurewebsites.net/${{ secrets.CLIENT_ID }}
+          set REACT_APP_ADMIN_ENV=${{ secrets.ADMIN_ENVIRONMENT }}
+          set REACT_APP_FEEDBACK_FORM_URL=${{ secrets.FEEDBACK_FORM_URL }}
+          set REACT_APP_FAQ_URL=${{ secrets.FAQ_URL }}
+          set REACT_APP_AI_CONNECTION_STRING=${{ secrets.APP_INSIGHTS_CONNECTION_STRING }}
+          npm run build:prod
+        working-directory: AutomationCatalogForPowerPlatform/ACPP.Client
+
+      - name: Copy Locales
+        run: xcopy "src\\i18n\\locales" "build\\static\\locales\\" /e /s /y
+        working-directory: AutomationCatalogForPowerPlatform/ACPP.Client
+
+      - name: Copy Files
+        run: xcopy "AutomationCatalogForPowerPlatform\\ACPP.Client\\build" "${{ github.workspace }}\\dropUI\\ClientApp" /e /s /y
+
+      - name: Upload UI Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: dropUI
+          path: ${{ github.workspace }}/dropUI
+
+  deploy-code:
+    needs: [build-api, build-ui]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download API Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: dropAPI
+          path: dropAPI
+
+      - name: Download UI Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: dropUI
+          path: dropUI
+
+      - name: Merge API and UI
+        run: |
+          xcopy "dropAPI\\ACPP.API" "${{ github.workspace }}\\dist" /e /s
+          xcopy "dropUI\\ClientApp" "${{ github.workspace }}\\dist\\ClientApp" /e /s
+
+      # - name: Deploy to Azure Web App
+      #   uses: azure/webapps-deploy@v3
+      #   with:
+      #     app-name: ${{ secrets.APP_SERVICE }}
+      #     publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+      #     package: ${{ github.workspace }}/dist
 
 
           
