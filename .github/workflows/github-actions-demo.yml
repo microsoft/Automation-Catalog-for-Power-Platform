@@ -17,7 +17,7 @@ jobs:
          run: echo "Hello, World!"
        - uses: azure/login@v2
          with:
-           creds: '{"clientId":"8d85d728-eff5-4a74-987e-035b239d5ea1","clientSecret":"${{ secrets.AZURE_CLIENT_SECRET }}","subscriptionId":"ae690070-fde1-463d-99e1-42c8a364ed7d","tenantId":"5fd0f7e7-b27a-4b1d-9897-57500d767b01"}'
+           creds: '{"clientSecret":"${{ secrets.AZURE_CLIENT_SECRET }}","subscriptionId":"ae690070-fde1-463d-99e1-42c8a364ed7d","tenantId":"5fd0f7e7-b27a-4b1d-9897-57500d767b01","clientId":"8d85d728-eff5-4a74-987e-035b239d5ea1"}'
            auth-type: SERVICE_PRINCIPAL
    
        - name: Azure CLI script
