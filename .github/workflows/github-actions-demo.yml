@@ -48,7 +48,6 @@ jobs:
           operation: create
           scope: resourceGroup
           name: DeployResources
-          location: eastus
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           resource-group-name: ah-catalog-test
