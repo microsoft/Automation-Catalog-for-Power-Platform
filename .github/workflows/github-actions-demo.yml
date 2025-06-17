@@ -12,8 +12,8 @@ jobs:
         uses: azure/login@v2
         with:
           auth-type: IDENTITY
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          tenant-id: 5fd0f7e7-b27a-4b1d-9897-57500d767b01
+          subscription-id: ae690070-fde1-463d-99e1-42c8a364ed7d
           enable-AzPSSession: true
 
       # Azure CLI Action only supports linux self-hosted runners for now.
