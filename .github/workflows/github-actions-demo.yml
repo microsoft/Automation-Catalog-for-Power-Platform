@@ -43,7 +43,7 @@ jobs:
         with:
           type: deployment
           operation: create
-          scope: subscription
+          scope: resourceGroup
           name: DeployResources
           location: eastus
           tenant-id: 5fd0f7e7-b27a-4b1d-9897-57500d767b01
