@@ -57,7 +57,7 @@ jobs:
             tenantId: ${{ secrets.AZURE_TENANT_ID }}
             appService: appService-sg-1
             appServicePlan: appServicePlan-sg-1
-            storageAccount: storageAccSg1
+            storageAccount: storageaccsg1
             applicationInsights: AiSg1
             catalogPublisherId: fb31ecb7-e51e-f011-998a-000d3a8040d2
             catalogEnvUrl: https://org028f6349.api.crm5.dynamics.com/
