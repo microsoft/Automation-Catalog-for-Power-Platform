@@ -39,7 +39,7 @@ jobs:
            
       - name: Azure Resource Manager Deployment
         id: deployment
-        uses: azure/arm-deploy@v1
+        uses: azure/bicep-deploy@v2
         with:
           type: deployment
           operation: create
