@@ -44,10 +44,4 @@ jobs:
       #     inlineScript: |
       #       az account show
 
-       - name: Azure PowerShell script
-         uses: azure/powershell@v2
-         with:
-          azPSVersion: "latest"
-          inlineScript: |
-            Get-AzContext
             Get-AzResourceGroup
