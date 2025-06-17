@@ -13,9 +13,6 @@ param storageAccount string
 @description('Application Insights name')
 param applicationInsights string
 
-@description('The name of the resource group where the resources will be deployed (From parameters.prod.json)')
-param resourceGroupName string
-
 @description('Client ID of the application')
 param clientId string
 
