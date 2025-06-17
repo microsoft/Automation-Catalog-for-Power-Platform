@@ -18,7 +18,6 @@ jobs:
        - uses: azure/login@v2
          with:
            creds: ${{secrets.AZURE_CREDENTIAL}}
-           auth-type: SERVICE_PRINCIPAL
    
        - name: Azure CLI script
          uses: azure/cli@v2
