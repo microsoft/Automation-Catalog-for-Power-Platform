@@ -1,47 +1,25 @@
-name: CI
+# File: .github/workflows/workflow.yml
 
-on:
-   push:
-     branches:
-       - main
+name: Run Azure Login with OIDC
+on: [push]
 
+permissions:
+  id-token: write
+  contents: read
 jobs:
-   build:
-     runs-on: ubuntu-latest
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-     steps:
-       - name: Get Your Code
-         uses: actions/checkout@v2
-
-       - name: Say Hello to the World
-         run: echo "Hello, World!"
-       - uses: azure/login@v2
-         with:
-           creds: ${{secrets.AZURE_CREDENTIAL}}
-   
-       - name: Azure CLI script
-         uses: azure/cli@v2
-         with:
-           azcliversion: latest
-           inlineScript: |
-             az account show
-             
-      #  - name: Azure login
-      #    uses: azure/login@v2
-      #    with:
-      #     auth-type: IDENTITY
-      #     client-id: 5c9d6817-a4c2-4afb-8dac-79e70d032a8d
-      #     tenant-id: 5fd0f7e7-b27a-4b1d-9897-57500d767b01
-      #     subscription-id: ae690070-fde1-463d-99e1-42c8a364ed7d
-      #     enable-AzPSSession: true
-
-      # # Azure CLI Action only supports linux self-hosted runners for now.
-      # # If you want to execute the Azure CLI script on a windows self-hosted runner, you can execute it directly in `run`.
-      #  - name: Azure CLI script
-      #    uses: azure/cli@v2
-      #    with:
-      #     azcliversion: latest
-      #     inlineScript: |
-      #       az account show
-
-            Get-AzResourceGroup
+      - name: Azure CLI script
+        uses: azure/cli@v2
+        with:
+          azcliversion: latest
+          inlineScript: |
+            az account show
