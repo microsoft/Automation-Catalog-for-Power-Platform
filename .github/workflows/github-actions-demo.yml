@@ -10,17 +10,38 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Azure login
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login
         uses: azure/login@v2
         with:
-          client-id: 5c9d6817-a4c2-4afb-8dac-79e70d032a8d
-          tenant-id: 5fd0f7e7-b27a-4b1d-9897-57500d767b01
-          subscription-id: ae690070-fde1-463d-99e1-42c8a364ed7d
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           allow-no-subscriptions: true
 
-      - name: Azure CLI script
-        uses: azure/cli@v2
+      - name: Azure Resource Manager Deployment
+        id: deployment
+        uses: azure/bicep-deploy@v2
         with:
-          azcliversion: latest
-          inlineScript: |
-            az account show
+          type: deployment
+          operation: create
+          scope: subscription
+          name: DeployResources
+          location: ${{ secrets.LOCATION }}
+          tenantId: "${{ secrets.TENANT_ID }}"
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          resource-group-name: ${{ secrets.RESOURCE_GROUP_NAME }}
+          template-file: AutomationCatalogForPowerPlatform/ACPP.Infrastructure/template.bicep         
+          parameters: >
+            -resourceGroupName "${{ secrets.RESOURCE_GROUP_NAME }}"
+            -clientId "${{ secrets.CLIENT_ID }}"
+            -tenantId "${{ secrets.TENANT_ID }}"
+            -appService "${{ secrets.APP_SERVICE }}"
+            -appServicePlan "${{ secrets.APP_SERVICE_PLAN }}"
+            -storageAccount "${{ secrets.STORAGE_ACCOUNT }}"
+            -applicationInsights "${{ secrets.APPLICATION_INSIGHTS }}"
+            -catalogPublisherId "${{ secrets.CATALOG_PUBLISHER_ID }}"
+            -catalogEnvUrl "${{ secrets.CATALOG_ENV_URL }}"
+            
