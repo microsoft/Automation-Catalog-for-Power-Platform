@@ -210,14 +210,6 @@ resource applicationInsights_resource 'microsoft.insights/components@2020-02-02'
     publicNetworkAccessForQuery: 'Enabled'
   }
 }
-// module roleAssignmentTemplateStorageAccount 'roleAssignment.bicep' = {
-//   name: 'roleAssignmentTemplate'
-//   scope: resourceGroup(resourceGroupName)
-//   params: {
-//     entityPrincipalId: appService_resource.identity.principalId
-//     storageAccounts_apdstorageprod_name: storageAccounts_apdstorageprod_name
-//   }
-// }
 
 var appSettings = {
   APPINSIGHTS_INSTRUMENTATIONKEY: applicationInsights_resource.properties.InstrumentationKey
