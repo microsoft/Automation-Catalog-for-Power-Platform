@@ -90,7 +90,10 @@ jobs:
 
       - name: Install Packages
         run: npm config set registry https://registry.npmjs.org/
-             npm install
+        working-directory: AutomationCatalogForPowerPlatform/ACPP.Client
+        
+      - name: Install Packages
+        run: npm install
         working-directory: AutomationCatalogForPowerPlatform/ACPP.Client
 
       - name: Build UI
