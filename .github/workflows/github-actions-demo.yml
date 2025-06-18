@@ -68,7 +68,7 @@ jobs:
         run: dotnet publish AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj --configuration Release --no-restore --output ${{ github.workspace }}/dropAPI
 
       - name: Upload API Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: dropAPI
           path: ${{ github.workspace }}/dropAPI
