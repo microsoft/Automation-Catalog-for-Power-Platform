@@ -59,7 +59,7 @@ jobs:
           dotnet-version: '8.0.x'
       
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj
       
       - name: Change Directory
         run: cd AutomationCatalogForPowerPlatform/ACPP.API
