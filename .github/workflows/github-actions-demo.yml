@@ -61,6 +61,9 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
       
+      - name: Change Directory
+        run: cd AutomationCatalogForPowerPlatform/ACPP.API
+      
       - name: Build API
         run: dotnet build AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj --configuration Release --no-restore
 
