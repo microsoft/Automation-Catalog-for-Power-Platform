@@ -88,10 +88,6 @@ jobs:
         with:
           node-version: '18.15.x'
 
-      - name: Set Registry
-        run: npm config set registry https://registry.npmjs.org/
-        working-directory: AutomationCatalogForPowerPlatform/ACPP.Client
-        
       - name: Install Packages
         run: npm install
         working-directory: AutomationCatalogForPowerPlatform/ACPP.Client
