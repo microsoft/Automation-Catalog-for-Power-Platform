@@ -4,6 +4,7 @@
     "engines": {
         "node": "16 || 18"
     },
+    "private": true,
     "dependencies": {
         "@fluentui/react-components": "^9.46.6",
         "@fluentui/react-icons": "^2.0.212",
