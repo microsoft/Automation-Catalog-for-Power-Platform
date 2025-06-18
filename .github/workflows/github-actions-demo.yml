@@ -94,13 +94,13 @@ jobs:
       - name: Build UI
         run: |
           set REACT_APP_BUILD_ID=${{ github.run_number }}
-          set REACT_APP_TEAMS_APP_ID=${{ secrets.TEAMS_APP_ID }}
+          set REACT_APP_TEAMS_APP_ID=${{ github.TEAMSAPPID }}
           set REACT_APP_CLIENT_ID=${{ secrets.CLIENT_ID }}
-          set REACT_APP_DEFAULT_TOKEN_SCOPE=api://${{ secrets.APP_SERVICE }}.azurewebsites.net/${{ secrets.CLIENT_ID }}
-          set REACT_APP_ADMIN_ENV=${{ secrets.ADMIN_ENVIRONMENT }}
-          set REACT_APP_FEEDBACK_FORM_URL=${{ secrets.FEEDBACK_FORM_URL }}
-          set REACT_APP_FAQ_URL=${{ secrets.FAQ_URL }}
-          set REACT_APP_AI_CONNECTION_STRING=${{ secrets.APP_INSIGHTS_CONNECTION_STRING }}
+          set REACT_APP_DEFAULT_TOKEN_SCOPE=api://${{ github.APPSERVICE }}.azurewebsites.net/${{ secrets.CLIENT_ID }}
+          set REACT_APP_ADMIN_ENV=${{ github.ADMINENVIRONMENT }}
+          set REACT_APP_FEEDBACK_FORM_URL=${{ github.FEEDBACKFORMURL }}
+          set REACT_APP_FAQ_URL=${{ github.FAQURL }}
+          set REACT_APP_AI_CONNECTION_STRING=${{ github.APPINSIGHTSCONNECTIONSTRING }}
           npm run build:prod
         working-directory: AutomationCatalogForPowerPlatform/ACPP.Client
 
