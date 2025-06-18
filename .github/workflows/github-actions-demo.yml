@@ -89,7 +89,8 @@ jobs:
           node-version: '18.15.x'
 
       - name: Install Packages
-        run: npm install
+        run: npm config set registry https://registry.npmjs.org/
+             npm install
         working-directory: AutomationCatalogForPowerPlatform/ACPP.Client
 
       - name: Build UI
