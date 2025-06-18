@@ -94,7 +94,6 @@ jobs:
         
       - name: Install Packages
         run: npm install
-        working-directory: AutomationCatalogForPowerPlatform/ACPP.Client
 
       - name: Build UI
         run: |
