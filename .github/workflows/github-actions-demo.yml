@@ -21,21 +21,6 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
           allow-no-subscriptions: true
 
-      # - name: Azure Resource Manager Deployment
-      #   id: deployment
-      #   uses: azure/bicep-deploy@v2
-      #   with:
-      #     type: deployment
-      #     operation: create
-      #     scope: resourceGroup
-      #     name: DeployResources
-      #     location: eastus
-      #     tenant-id: 5fd0f7e7-b27a-4b1d-9897-57500d767b01
-      #     subscription-id: ae690070-fde1-463d-99e1-42c8a364ed7d
-      #     resource-group-name: ah-catalog-test
-      #     template-file: AutomationCatalogForPowerPlatform/ACPP.Infrastructure/template.bicep         
-      #     parameters: '{"resourceGroupName":"ah-catalog-test","clientId":"5c9d6817-a4c2-4afb-8dac-79e70d032a8d","tenantId":"5fd0f7e7-b27a-4b1d-9897-57500d767b01","appService":"appService-sg-1","appServicePlan":"appServicePlan-sg-1","storageAccount":"storageAccSg1","applicationInsights":"AiSg1","catalogPublisherId":"fb31ecb7-e51e-f011-998a-000d3a8040d2","catalogEnvUrl":"https://org028f6349.api.crm5.dynamics.com/"}'
-          
       - name: Create Resource Group
         run: |
           az group create --name ah-catalog-test --location eastus
@@ -61,6 +46,7 @@ jobs:
             applicationInsights: AiSg1
             catalogPublisherId: fb31ecb7-e51e-f011-998a-000d3a8040d2
             catalogEnvUrl: https://org028f6349.api.crm5.dynamics.com/
+            
   build-api:
     runs-on: ubuntu-latest
     steps:
@@ -73,10 +59,10 @@ jobs:
           dotnet-version: '6.0.x'
 
       - name: Build API
-        run: dotnet build AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj --configuration ${{ env.buildConfiguration }}
+        run: dotnet build AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj --configuration Release
 
       - name: Publish API
-        run: dotnet publish AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj --configuration ${{ env.buildConfiguration }} --output ${{ github.workspace }}/dropAPI
+        run: dotnet publish AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj --configuration Release --output ${{ github.workspace }}/dropAPI
 
       - name: Upload API Artifact
         uses: actions/upload-artifact@v4.6.2
