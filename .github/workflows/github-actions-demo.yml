@@ -87,6 +87,7 @@ jobs:
         uses: actions/setup-node@v4.4.0
         with:
           node-version: '18.15.x'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install Packages
         run: npm install
