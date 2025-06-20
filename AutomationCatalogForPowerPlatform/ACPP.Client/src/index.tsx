@@ -87,7 +87,7 @@ const Main = () => {
         .catch((e) => {
           app.notifyFailure(e);
         });
-  }, [loading, appEnv, extractsubPageIdJson, setTabInfo, trackEvent]);
+  }, [loading, appEnv, setTabInfo, trackEvent]);
 
   useEffect(() => {
     const urlWithParams = new URL(window.location.href);
