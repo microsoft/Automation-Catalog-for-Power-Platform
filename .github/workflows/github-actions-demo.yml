@@ -150,8 +150,8 @@ jobs:
 
       - name: Merge API and UI
         run: |
-          xcopy "dropAPI\\ACPP.API" "${{ github.workspace }}\\dist" /e /s
-          xcopy "dropUI\\ClientApp" "${{ github.workspace }}\\dist\\ClientApp" /e /s
+          xcopy "dropAPI\\ACPP.API" "${{ github.workspace }}\\dist" /e /s /i
+          xcopy "dropUI\\ACPP.Client\\ClientApp" "${{ github.workspace }}\\dist\\ClientApp" /e /s /i
 
       - name: Login
         uses: azure/login@v2
