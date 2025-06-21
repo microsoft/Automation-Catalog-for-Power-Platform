@@ -307,3 +307,195 @@ Open the application insights that got created. Open Configure->Properties and m
 ### Troubleshooting
 1.	While running the pipeline, if you see an error of the kind: MissingSubscriptionRegistration: The subscription is not registered to use namespace 'Microsoft.Web'.
 Follow the steps mentioned here: [Resource provider registration errors - Azure Resource Manager | Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-resource-manager/troubleshooting/error-register-resource-provider?tabs=azure-portal)
+
+###
+###
+###
+###
+###
+###
+###
+###
+### 4. Create a user assigned managed identity and add federated credentials in the identity:
+
+Create a user assigned manages identity in azure portal. Choose an existing resource group or create new one if needed. ([Create a user-assigned managed identity | Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/how-manage-user-assigned-managed-identities?pivots=identity-mi-methods-azp#create-a-user-assigned-managed-identity) )
+
+1. To aithenticate successfully to github, create federated credentials in the identity. Open the user assigned managed identity and open federated credentials.
+
+1. Fill in the following details
+
+<table>
+<tr>
+<td><b>Federated Credential Scenario</b></td>
+<td>Configure a GitHub issued token to impersonate this application and deploy to Azure</td>
+</tr>
+
+<tr>
+<td><b>Issuer</b></td>
+<td>[Refer in the same document - (Create an app registration)](https://token.actions.githubusercontent.com)</td>
+</tr>
+
+<tr>
+<td><b>Organization</b></td>
+<td>(Refer the organization name from github)</td>
+</tr>
+
+<tr>
+<td><b>Repository</b></td>
+<td>(Refer the repository name from github)</td>
+</tr>
+
+<tr>
+<td><b>Entity</b></td>
+<td>Branch</td>
+</tr>
+
+<tr>
+<td><b>Branch</b></td>
+<td>*</td>
+</tr>
+
+<tr>
+<td><b>Branch</b></td>
+<td>repo:adminCRM435332/Automation-Catalog-for-Power-Platform:ref:refs/heads/*</td>
+</tr>
+</table>
+
+Give a name to the credential and save it.
+
+### 5. Create github actions workflow:
+
+1. Navigate to the Github actions tab.
+
+1. A workflow is already created from the yml present in .github/workflows/github-actions-demo.yml
+
+### 6. Add Pipeline variables:
+
+1. Open the settings tab in Github.
+
+1. Click on secrets and variables and add the following variables and secrets.
+
+1. Add the values for all the variables. Service Connection and environment names are the same used while creating them in the previous steps.
+
+<table>
+<tr>
+<th>Secret Name</th>
+<th> Can be referenced from</th>
+</tr>
+
+<tr>
+<td><b>ClientId</b></td>
+<td>Refer in the same document - (Create an app registration)</td>
+</tr>
+
+<tr>
+<td><b>TenantId</b></td>
+<td>Refer in the same document - (Create an app registration)</td>
+</tr>
+
+<tr>
+<td><b>SubscriptionId</b></td>
+<td>Refer in the same document - (Create an enterprise subscription)</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<th>Variable Name</th>
+<th> Can be referenced from</th>
+</tr>
+ 
+<tr>
+<td><b>appService</b></td>
+<td>Give your own name</td>
+</tr>
+
+<tr>
+<td><b>appServicePlan</b></td>
+<td>Give your own name</td>
+</tr>
+
+<tr>
+<td><b>applicationInsights</b></td>
+<td>Give your own name</td>
+</tr>
+
+<tr>
+<td><b>storageAccount</b></td>
+<td>Give your own name (*Storage account name must be between 3 and 24 characters in length and use numbers and lower-case letters only.)</td>
+</tr>
+
+<tr>
+<td><b>ResourceGroupName</b></td>
+<td>Give your own name</td>
+</tr>
+
+<tr>
+<td><b>location</b></td>
+<td>Give location of your preference where the resource group and resources should be present (eg: westus2)</td>
+</tr>
+
+<tr>
+<td><b>catalogEnvUrl</b></td>
+<td>URL of the environment associated with the catalog</td>
+</tr>
+
+<tr>
+<td><b>catalogPublisherId</b></td>
+<td>ID of the catalog publisher created</td>
+</tr>
+
+<tr>
+<td><b>teamsAppId</b></td>
+<td>Keep this empty. This variable should be set later.</td>
+</tr>
+
+<tr>
+<td><b>feedbackFormUrl</b></td>
+<td>URL to your feedback form</td>
+</tr>
+
+<tr>
+<td><b>faqUrl</b></td>
+<td>URL where FAQs are going to be present</td>
+</tr>
+
+<tr>
+<td><b>adminEnvironment</b></td>
+<td>Default Environment ID </td>
+</tr>
+
+<tr>
+<td><b>AppInsightsConnectionString</b></td>
+<td>Keep this empty. This variable should be set later.</td>
+</tr>
+</table>
+
+### 7. Role Assignment:
+
+The managed identity should be given permissions to create the resource group and resources when the pipeline is ran using bicep templates.  
+
+Give the following roles to the identity at subscription level.  
+
+[Assign Azure roles using the Azure portal - Azure RBAC | Microsoft Learn](https://learn.microsoft.com/en-us/Azure/role-based-access-control/role-assignments-portal)  
+
+Go to your subscription, click on the ‘Access Control (IAM)’ and assign the following roles  
+
+1. ‘Corp Tenant DevOps Role’ //MS specific
+
+1. ‘Contributor’
+
+1. ‘Role Based Access Control’ (Revoke this access after deploying resources)
+
+### 8. Run workflow:
+
+1. Run the workflow which got created in the above step.
+
+### 9. Role Assignment
+
+When the workflow ran successfully, assign the following role.
+
+Go to the storage account that got created in the resource group, click on the ‘Access Control (IAM)’.
+
+Assign the following role ‘Storage Blob Table Contributor’ to the ‘appService’ that has been created in the resource group in the Azure subscription.
+
