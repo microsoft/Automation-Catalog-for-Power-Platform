@@ -41,6 +41,17 @@ const Main = () => {
     clientId: config.clientId!,
   });
 
+  const extractsubPageIdJson = useCallback((subPageId: string) => {
+    let subPageIdJson: any;
+    if (subPageId.includes("'")) {
+      subPageIdJson = JSON.parse(subPageId.replace(/'/g, '"'));
+    }
+    else {
+      subPageIdJson = customParse(subPageId.replace(/'/g, ''));
+    }
+    return subPageIdJson;
+  }, []);
+
   useEffect(() => {
     if (context?.app?.locale && context.app.locale !== i18n.language) i18n.changeLanguage(context.app.locale);
   }, [context]);
@@ -87,7 +98,7 @@ const Main = () => {
         .catch((e) => {
           app.notifyFailure(e);
         });
-  }, [loading, appEnv, extractsubPageIdJson(), setTabInfo, trackEvent]);
+  }, [loading, appEnv, extractsubPageIdJson, setTabInfo, trackEvent]);
 
   useEffect(() => {
     const urlWithParams = new URL(window.location.href);
@@ -101,17 +112,6 @@ const Main = () => {
 
   const queryClient = useMemo(() => {
     return new QueryClient();
-  }, []);
-
-  const extractsubPageIdJson = useCallback((subPageId: string) => {
-    let subPageIdJson: any;
-    if (subPageId.includes("'")) {
-      subPageIdJson = JSON.parse(subPageId.replace(/'/g, '"'));
-    }
-    else {
-      subPageIdJson = customParse(subPageId.replace(/'/g, ''));
-    }
-    return subPageIdJson;
   }, []);
 
   const renderContent = useCallback(() => {
