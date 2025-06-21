@@ -164,7 +164,7 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: ${{ secrets.APP_SERVICE }}
+          app-name: ${{ github.APPSERVICE }}
           package: ${{ github.workspace }}/dist
 
 
