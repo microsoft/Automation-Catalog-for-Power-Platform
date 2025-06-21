@@ -118,6 +118,12 @@ jobs:
           $source = "AutomationCatalogForPowerPlatform/ACPP.Client/build"
           $target = "$env:GITHUB_WORKSPACE/ACPP.Client/ClientApp"
           robocopy $source $target /E /XF *.map
+          $exitCode = $LASTEXITCODE
+          if($exitCode -le 7) {
+            exit 0 
+          } else {
+            exit $exitCode
+          }
         shell: pwsh
 
       - name: Upload UI Artifact
