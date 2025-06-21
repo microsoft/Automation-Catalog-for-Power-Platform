@@ -96,13 +96,13 @@ jobs:
       - name: Build UI
         run: |
           set REACT_APP_BUILD_ID=${{ github.run_number }}
-          set REACT_APP_TEAMS_APP_ID=${{ github.TEAMSAPPID }}
+          set REACT_APP_TEAMS_APP_ID=${{ vars.TEAMSAPPID }}
           set REACT_APP_CLIENT_ID=${{ secrets.CLIENT_ID }}
-          set REACT_APP_DEFAULT_TOKEN_SCOPE=api://${{ github.APPSERVICE }}.azurewebsites.net/${{ secrets.CLIENT_ID }}
-          set REACT_APP_ADMIN_ENV=${{ github.ADMINENVIRONMENT }}
-          set REACT_APP_FEEDBACK_FORM_URL=${{ github.FEEDBACKFORMURL }}
-          set REACT_APP_FAQ_URL=${{ github.FAQURL }}
-          set REACT_APP_AI_CONNECTION_STRING=${{ github.APPINSIGHTSCONNECTIONSTRING }}
+          set REACT_APP_DEFAULT_TOKEN_SCOPE=api://${{ vars.APPSERVICE }}.azurewebsites.net/${{ secrets.CLIENT_ID }}
+          set REACT_APP_ADMIN_ENV=${{ vars.ADMINENVIRONMENT }}
+          set REACT_APP_FEEDBACK_FORM_URL=${{ vars.FEEDBACKFORMURL }}
+          set REACT_APP_FAQ_URL=${{ vars.FAQURL }}
+          set REACT_APP_AI_CONNECTION_STRING=${{ vars.APPINSIGHTSCONNECTIONSTRING }}
           npm run build:prod
         working-directory: AutomationCatalogForPowerPlatform/ACPP.Client
         env:
@@ -164,7 +164,7 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: ${{ github.APPSERVICE }}
+          app-name: ${{ vars.APPSERVICE }}
           package: ${{ github.workspace }}/dist
 
 
