@@ -320,7 +320,7 @@ Follow the steps mentioned here: [Resource provider registration errors - Azure 
 
 Create a user assigned manages identity in azure portal. Choose an existing resource group or create new one if needed. ([Create a user-assigned managed identity | Microsoft Learn](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/how-manage-user-assigned-managed-identities?pivots=identity-mi-methods-azp#create-a-user-assigned-managed-identity) )
 
-1. To aithenticate successfully to github, create federated credentials in the identity. Open the user assigned managed identity and open federated credentials.
+1. To authenticate successfully to github, create federated credentials in the identity. Open the user assigned managed identity and open federated credentials.
 
 1. Fill in the following details
 
@@ -357,7 +357,7 @@ Create a user assigned manages identity in azure portal. Choose an existing reso
 
 <tr>
 <td><b>Branch</b></td>
-<td>repo:adminCRM435332/Automation-Catalog-for-Power-Platform:ref:refs/heads/*</td>
+<td>repo:<github-organization>/<repository-name>:ref:refs/heads/*</td>
 </tr>
 </table>
 
