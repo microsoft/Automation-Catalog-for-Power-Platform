@@ -69,7 +69,7 @@ jobs:
         run: dotnet build AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj --configuration Release --no-restore
 
       - name: Publish API
-        run: dotnet publish AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj --configuration Release --no-restore --output ${{ github.workspace }}/dropAPI
+        run: dotnet publish AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj --configuration Release --no-restore --output ${{ github.workspace }}/dropAPI/ACPP.API
 
       - name: Upload API Artifact
         uses: actions/upload-artifact@v4.6.2
@@ -116,7 +116,7 @@ jobs:
       - name: Copy files excluding map
         run: |
           $source = "AutomationCatalogForPowerPlatform/ACPP.Client/build"
-          $target = "$env:GITHUB_WORKSPACE/dropUI/ClientApp"
+          $target = "$env:GITHUB_WORKSPACE/dropUI/ACPP.Client/ClientApp"
           robocopy $source $target /E /XF *.map
           $exitCode = $LASTEXITCODE
           if($exitCode -le 7) {
