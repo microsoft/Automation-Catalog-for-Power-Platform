@@ -67,8 +67,6 @@ jobs:
       
       - name: Build API
         run: dotnet build AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj --configuration Release --no-restore
-        env:
-          CI: ""
 
       - name: Publish API
         run: dotnet publish AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj --configuration Release --no-restore --output ${{ github.workspace }}/dropAPI
@@ -107,6 +105,8 @@ jobs:
           set REACT_APP_AI_CONNECTION_STRING=${{ github.APPINSIGHTSCONNECTIONSTRING }}
           npm run build:prod
         working-directory: AutomationCatalogForPowerPlatform/ACPP.Client
+        env:
+          CI: ""
 
       - name: Copy Locales
         run: xcopy "src\\i18n\\locales" "build\\static\\locales\\" /e /s /y
