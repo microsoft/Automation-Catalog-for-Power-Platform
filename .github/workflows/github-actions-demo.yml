@@ -67,6 +67,8 @@ jobs:
       
       - name: Build API
         run: dotnet build AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj --configuration Release --no-restore
+        env:
+          CI: ""
 
       - name: Publish API
         run: dotnet publish AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj --configuration Release --no-restore --output ${{ github.workspace }}/dropAPI
