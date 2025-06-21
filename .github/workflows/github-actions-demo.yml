@@ -110,10 +110,12 @@ jobs:
 
       - name: Copy Locales
         run: xcopy "src\\i18n\\locales" "build\\static\\locales\\" /e /s /y
+        shell: cmd
         working-directory: AutomationCatalogForPowerPlatform/ACPP.Client
 
       - name: Copy Files
         run: xcopy "AutomationCatalogForPowerPlatform\\ACPP.Client\\build" "${{ github.workspace }}\\dropUI\\ClientApp" /e /s /y
+        shell: cmd
 
       - name: Upload UI Artifact
         uses: actions/upload-artifact@v4.6.2
