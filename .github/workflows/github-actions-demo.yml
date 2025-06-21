@@ -116,7 +116,7 @@ jobs:
       - name: Copy files excluding map
         run: |
           $source = "AutomationCatalogForPowerPlatform/ACPP.Client/build"
-          $target = "$env:GITHUB_WORKSPACE/ACPP.Client/ClientApp"
+          $target = "$env:GITHUB_WORKSPACE/dropUI/ClientApp"
           robocopy $source $target /E /XF *.map
           $exitCode = $LASTEXITCODE
           if($exitCode -le 7) {
