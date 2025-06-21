@@ -107,6 +107,7 @@ jobs:
         working-directory: AutomationCatalogForPowerPlatform/ACPP.Client
         env:
           CI: ""
+        shell: cmd
 
       - name: Copy Locales
         run: xcopy "src\\i18n\\locales" "build\\static\\locales\\" /e /s /y
