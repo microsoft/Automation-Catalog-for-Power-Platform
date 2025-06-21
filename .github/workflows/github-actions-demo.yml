@@ -137,13 +137,13 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Download API Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.3.0
         with:
           name: dropAPI
           path: dropAPI
 
       - name: Download UI Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.3.0
         with:
           name: dropUI
           path: dropUI
@@ -153,12 +153,19 @@ jobs:
           xcopy "dropAPI\\ACPP.API" "${{ github.workspace }}\\dist" /e /s
           xcopy "dropUI\\ClientApp" "${{ github.workspace }}\\dist\\ClientApp" /e /s
 
-      # - name: Deploy to Azure Web App
-      #   uses: azure/webapps-deploy@v3
-      #   with:
-      #     app-name: ${{ secrets.APP_SERVICE }}
-      #     publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-      #     package: ${{ github.workspace }}/dist
+      - name: Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          allow-no-subscriptions: true
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ secrets.APP_SERVICE }}
+          package: ${{ github.workspace }}/dist
 
 
           
