@@ -21,7 +21,7 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: windows-latest
-    if: env.DEPLOY_AZ_RESOURCES == 'true'
+    if: $DEPLOY_AZ_RESOURCES == 'true'
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
