@@ -12,16 +12,13 @@ on:
         type: boolean
         required: false
 
-env:
-  DEPLOY_AZ_RESOURCES: ${{ github.event.inputs.deployResources == 'true' }}
-
 permissions:
   id-token: write
   contents: read
 jobs:
   build-and-deploy:
     runs-on: windows-latest
-    if: $DEPLOY_AZ_RESOURCES == 'true'
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.deployResources == 'true'
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
