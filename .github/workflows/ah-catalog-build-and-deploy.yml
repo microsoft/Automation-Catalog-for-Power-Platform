@@ -64,11 +64,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        
-      - name: Check vals
-        run: |
-          echo clientid ${{secrets.AZURE_CLIENT_ID}} | sed 's/./& /g'
-          echo fic ${{secrets.AZURE_FIC_CLIENT_ID}} | sed 's/./& /g'
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
@@ -113,8 +108,8 @@ jobs:
         run: |
           set REACT_APP_BUILD_ID=${{ github.run_number }}
           set REACT_APP_TEAMS_APP_ID=${{ vars.TEAMSAPPID }}
-          set REACT_APP_CLIENT_ID=${{ secrets.CLIENT_ID }}
-          set REACT_APP_DEFAULT_TOKEN_SCOPE=api://${{ vars.APPSERVICE }}.azurewebsites.net/${{ secrets.CLIENT_ID }}
+          set REACT_APP_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID }}
+          set REACT_APP_DEFAULT_TOKEN_SCOPE=api://${{ vars.APPSERVICE }}.azurewebsites.net/${{ secrets.AZURE_CLIENT_ID }}
           set REACT_APP_ADMIN_ENV=${{ vars.ADMINENVIRONMENT }}
           set REACT_APP_FEEDBACK_FORM_URL=${{ vars.FEEDBACKFORMURL }}
           set REACT_APP_FAQ_URL=${{ vars.FAQURL }}
