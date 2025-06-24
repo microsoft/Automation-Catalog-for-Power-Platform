@@ -31,14 +31,21 @@ namespace ACPP.API.Controllers
         [Route("GetUserDetails")]
         public async Task<UserDetails> GetUserDetails()
         {
-            _logger.LogInformation("GetUserDetails called");
-            string userId = TokenHelper.GetUserId(HttpContext.User.Identity);
-            UserDetails userDetails = await _userManager.GetUserDetails(userId);
-            if (userDetails == null)
+            try
             {
-                userDetails = await _userManager.AddNewUser(userId);
+                _logger.LogInformation("GetUserDetails called");
+                string userId = TokenHelper.GetUserId(HttpContext.User.Identity);
+                UserDetails userDetails = await _userManager.GetUserDetails(userId);
+                if (userDetails == null)
+                {
+                    userDetails = await _userManager.AddNewUser(userId);
+                }
+                return userDetails;
+            } catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Custom error:{HttpContext.User.Identity}");
+                return null;
             }
-            return userDetails;
         }
 
         [HttpPatch]
