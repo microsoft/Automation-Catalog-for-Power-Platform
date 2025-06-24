@@ -9,6 +9,7 @@ using ACPP.API.Providers.Implementations;
 using ACPP.API.Providers.Interfaces;
 using ACPP.API.Services.Implementations;
 using ACPP.API.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Identity.Web;
