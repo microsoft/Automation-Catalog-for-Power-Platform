@@ -16,7 +16,8 @@ using Microsoft.Identity.Web;
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.Services.AddMicrosoftIdentityWebApiAuthentication(builder.Configuration); 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddMicrosoftIdentityWebApi(builder.Configuration); 
 
 builder.Services.AddAuthorization();
 
