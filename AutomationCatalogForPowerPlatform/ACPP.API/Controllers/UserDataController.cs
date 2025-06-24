@@ -8,7 +8,6 @@ using ACPP.API.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using System.Security.Claims;
 
 namespace ACPP.API.Controllers
@@ -32,35 +31,14 @@ namespace ACPP.API.Controllers
         [Route("GetUserDetails")]
         public async Task<UserDetails> GetUserDetails()
         {
-            try
+            _logger.LogInformation("GetUserDetails called");
+            string userId = TokenHelper.GetUserId(HttpContext.User.Identity);
+            UserDetails userDetails = await _userManager.GetUserDetails(userId);
+            if (userDetails == null)
             {
-                _logger.LogInformation("GetUserDetails called");
-               var identity = HttpContext?.User?.Identity as ClaimsIdentity;
-                if (identity != null)
-                {
-                    foreach (var claim in identity.Claims)
-                    {
-                        _logger.LogError(new Exception("PRINT CLAIM"),$"Type: {claim.Type}, Value: {claim.Value}");
-                    }
-                }
-                
-                _logger.LogError(new Exception("PRINT isAuthenticated"), $"IsAuthenticated: {identity.IsAuthenticated}");
-                _logger.LogError(new Exception("PRINT authenticationtype"), $"AuthenticationType: {identity.AuthenticationType}");
-                _logger.LogError(new Exception("PRINT name"),$"Name: {identity.Name}");
-                
-                _logger.LogError(new Exception("FALSE ERROR"), $"HTTP Context object is {HttpContext.User.Identity.ToString()} and HTTP Context object name is {HttpContext.User.Identity}");
-                string userId = TokenHelper.GetUserId(HttpContext.User.Identity);
-                UserDetails userDetails = await _userManager.GetUserDetails(userId);
-                if (userDetails == null)
-                {
-                    userDetails = await _userManager.AddNewUser(userId);
-                }
-                return userDetails;
-            } catch (Exception ex)
-            {
-                _logger.LogError(ex, $"Custom error:{HttpContext.User.Identity}");
-                return null;
+                userDetails = await _userManager.AddNewUser(userId);
             }
+            return userDetails;
         }
 
         [HttpPatch]
