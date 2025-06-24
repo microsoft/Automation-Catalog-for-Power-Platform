@@ -27,6 +27,10 @@ namespace ACPP.API.Utilities
         {
             var claimsIdentity = GetClaimsIdentity(identity);
             var claim = claimsIdentity.Claims.FirstOrDefault(c => c.Type == _OIDclaimType);
+            if (claim == null)
+            {
+                claim = claimsIdentity.Claims.FirstOrDefault(c => c.Type == _OIDclaimType_1);
+            }
             return claim?.Value;
         }
 
