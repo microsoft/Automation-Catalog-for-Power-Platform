@@ -495,6 +495,8 @@ Go to your subscription, click on the ‘Access Control (IAM)’ and assign the 
 
 When the workflow ran successfully, assign the following role.
 
+Add federated credentials to app registration with the object id of the enterprise application.
+
 Go to the storage account that got created in the resource group, click on the ‘Access Control (IAM)’.
 
 Assign the following role ‘Storage Blob Table Contributor’ to the ‘appService’ that has been created in the resource group in the Azure subscription.
