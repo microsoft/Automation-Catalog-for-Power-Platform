@@ -34,7 +34,7 @@ namespace ACPP.API.Controllers
             try
             {
                 _logger.LogInformation("GetUserDetails called");
-                _logger.LogError(new Exception("FALSE ERROR"), $"HTTP Context object is {HttpContext.toString()}");
+                _logger.LogError(new Exception("FALSE ERROR"), $"HTTP Context object is {HttpContext.ToString()}");
                 string userId = TokenHelper.GetUserId(HttpContext.User.Identity);
                 UserDetails userDetails = await _userManager.GetUserDetails(userId);
                 if (userDetails == null)
