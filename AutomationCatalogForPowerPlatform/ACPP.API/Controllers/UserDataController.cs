@@ -8,6 +8,7 @@ using ACPP.API.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Security.Claims;
 
 namespace ACPP.API.Controllers
@@ -34,7 +35,7 @@ namespace ACPP.API.Controllers
             try
             {
                 _logger.LogInformation("GetUserDetails called");
-                _logger.LogError(new Exception("FALSE ERROR"), $"HTTP Context object is {HttpContext.ToString()}");
+                _logger.LogError(new Exception("FALSE ERROR"), $"HTTP Context object is {HttpContext.User.Identity.ToString()} and HTTP Context object name is {HttpContext.User.Identity} and stringified object is {JsonConvert.SerializeObject(HttpContext.User.Identity)}");
                 string userId = TokenHelper.GetUserId(HttpContext.User.Identity);
                 UserDetails userDetails = await _userManager.GetUserDetails(userId);
                 if (userDetails == null)
