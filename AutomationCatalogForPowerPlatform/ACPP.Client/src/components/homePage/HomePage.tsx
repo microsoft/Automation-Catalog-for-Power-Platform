@@ -115,7 +115,7 @@ export const HomePage = () => {
             <div className={styles.featuredCarousel}>
                 <CardCarousel cards={featuredCards} headerTitle={t('featured')} cardIsImage searchSelectedCategories={[t('featured')]} carouselClassname={styles.carouselClassname}/>
             </div>
-            : <CenteredSpinner classNames={commonStyles.padding5} />;
+            : <></>;
     }, [featuredCards]);
 
     const renderCategories = useCallback(() => {
