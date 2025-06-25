@@ -1,0 +1,183 @@
+# File: .github/workflows/workflow.yml
+
+name: Build and Deploy Automation Catalog
+on: 
+  push:
+    branches: 
+      - main
+  workflow_dispatch:
+    inputs:
+      deployResources:
+        description: 'Deploy Azure Resources'
+        type: boolean
+        required: false
+
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  build-and-deploy:
+    runs-on: windows-latest
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.deployResources == 'true'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_FIC_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          allow-no-subscriptions: true
+          enable-AzPSSession: true
+
+      - name: Create Resource Group
+        run: |
+          az group create --name ah-catalog-test --location eastus
+            
+      - name: Azure Resource Manager Deployment
+        id: deployment
+        uses: azure/bicep-deploy@v2
+        with:
+          type: deployment
+          operation: create
+          scope: resourceGroup
+          name: DeployResources
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          resource-group-name: ${{vars.RESOURCEGROUPNAME}}
+          template-file: AutomationCatalogForPowerPlatform/ACPP.Infrastructure/template.bicep
+          parameters: |
+            clientId: ${{ secrets.AZURE_CLIENT_ID }}
+            tenantId: ${{ secrets.AZURE_TENANT_ID }}
+            appService: ${{ vars.APPSERVICE }}
+            appServicePlan: ${{ vars.APPSERVICEPLAN }}
+            storageAccount: ${{ vars.STORAGEACCOUNT }}
+            applicationInsights: ${{ vars.APPLICATIONINSIGHTS }}
+            catalogPublisherId: ${{ vars.CATALOG_PUBLISHER_ID }}
+            catalogEnvUrl: ${{ vars.CATALOG_ENV_URL }}
+
+            
+  build-api:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+      
+      - name: Restore dependencies
+        run: dotnet restore AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj
+      
+      - name: Change Directory
+        run: cd AutomationCatalogForPowerPlatform/ACPP.API
+      
+      - name: Build API
+        run: dotnet build AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj --configuration Release --no-restore
+
+      - name: Publish API
+        run: dotnet publish AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj --configuration Release --no-restore --output ${{ github.workspace }}/dropAPI/ACPP.API
+
+      - name: Upload API Artifact
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: dropAPI
+          path: ${{ github.workspace }}/dropAPI
+
+  build-ui:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4.4.0
+        with:
+          node-version: '18.15.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install Packages
+        run: npm install
+        working-directory: AutomationCatalogForPowerPlatform/ACPP.Client
+
+      - name: Build UI
+        run: |
+          set REACT_APP_BUILD_ID=${{ github.run_number }}
+          set REACT_APP_TEAMS_APP_ID=${{ vars.TEAMSAPPID }}
+          set REACT_APP_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID }}
+          set REACT_APP_DEFAULT_TOKEN_SCOPE=api://${{ vars.APPSERVICE }}.azurewebsites.net/${{ secrets.AZURE_CLIENT_ID }}
+          set REACT_APP_ADMIN_ENV=${{ vars.ADMINENVIRONMENT }}
+          set REACT_APP_FEEDBACK_FORM_URL=${{ vars.FEEDBACKFORMURL }}
+          set REACT_APP_FAQ_URL=${{ vars.FAQURL }}
+          set REACT_APP_AI_CONNECTION_STRING=${{ vars.APPINSIGHTSCONNECTIONSTRING }}
+          npm run build:prod
+        working-directory: AutomationCatalogForPowerPlatform/ACPP.Client
+        env:
+          CI: ""
+        shell: cmd
+
+      - name: Copy Locales
+        run: xcopy "src\\i18n\\locales" "build\\static\\locales\\" /e /s /y
+        shell: cmd
+        working-directory: AutomationCatalogForPowerPlatform/ACPP.Client
+
+      - name: Copy files excluding map
+        run: |
+          $source = "AutomationCatalogForPowerPlatform/ACPP.Client/build"
+          $target = "$env:GITHUB_WORKSPACE/dropUI/ACPP.Client/ClientApp"
+          robocopy $source $target /E /XF *.map
+          $exitCode = $LASTEXITCODE
+          if($exitCode -le 7) {
+            exit 0 
+          } else {
+            exit $exitCode
+          }
+        shell: pwsh
+
+      - name: Upload UI Artifact
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: dropUI
+          path: ${{ github.workspace }}/dropUI
+
+  deploy-code:
+    needs: [build-api, build-ui]
+    runs-on: windows-latest
+    steps:
+      - name: Download API Artifact
+        uses: actions/download-artifact@v4.3.0
+        with:
+          name: dropAPI
+          path: dropAPI
+
+      - name: Download UI Artifact
+        uses: actions/download-artifact@v4.3.0
+        with:
+          name: dropUI
+          path: dropUI
+
+      - name: Merge API and UI
+        run: |
+          xcopy "dropAPI\\ACPP.API" "${{ github.workspace }}\\dist" /e /s /i
+          xcopy "dropUI\\ACPP.Client\\ClientApp" "${{ github.workspace }}\\dist\\ClientApp" /e /s /i
+
+      - name: Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_FIC_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          allow-no-subscriptions: true
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ vars.APPSERVICE }}
+          package: ${{ github.workspace }}/dist
+
+
+          
