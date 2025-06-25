@@ -10,6 +10,9 @@ export const useStyles = makeStyles({
     heightFitContent: {
         height: 'fit-content'
     },
+    marginTop: {
+        marginTop: "5%"
+    },
     homeHeader: {
         display: "flex",
         flexDirection: "row",
