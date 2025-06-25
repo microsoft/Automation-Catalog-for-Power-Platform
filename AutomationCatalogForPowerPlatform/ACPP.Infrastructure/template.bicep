@@ -213,7 +213,7 @@ var appSettings = {
   'AzureAd__ClientId': clientId
   'AzureAd__TenantId' : tenantId
   'AzureAd__Instance': 'https://login.microsoftonline.com/'
-  'AzureAd__Audience': 'api://${appService_resource.properties.defaultHostName}/${clientId}'
+  'AzureAd__Audiences': ['api://${appService_resource.properties.defaultHostName}/${clientId}','${clientId}']
   'AzureStorage__StorageAccountUri': storageAccounts_apdstorageprod_name_resource.properties.primaryEndpoints.table
   'AzureStorage__UsersTableName': 'Users'
   'AzureStorage__AnnouncementsTableName': 'Announcements'
