@@ -115,7 +115,7 @@ export const HomePage = () => {
             <div className={styles.featuredCarousel}>
                 <CardCarousel cards={featuredCards} headerTitle={t('featured')} cardIsImage searchSelectedCategories={[t('featured')]} carouselClassname={styles.carouselClassname}/>
             </div>
-            : <div style={{ marginTop: '5%' }}></div>;
+            : <div className={styles.marginTop}></div>;
     }, [featuredCards]);
 
     const renderCategories = useCallback(() => {
