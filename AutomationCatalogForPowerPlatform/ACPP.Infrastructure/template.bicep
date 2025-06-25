@@ -13,9 +13,6 @@ param storageAccount string
 @description('Application Insights name')
 param applicationInsights string
 
-@description('The name of the resource group where the resources will be deployed (From parameters.prod.json)')
-param resourceGroupName string
-
 @description('Client ID of the application')
 param clientId string
 
@@ -210,21 +207,13 @@ resource applicationInsights_resource 'microsoft.insights/components@2020-02-02'
     publicNetworkAccessForQuery: 'Enabled'
   }
 }
-// module roleAssignmentTemplateStorageAccount 'roleAssignment.bicep' = {
-//   name: 'roleAssignmentTemplate'
-//   scope: resourceGroup(resourceGroupName)
-//   params: {
-//     entityPrincipalId: appService_resource.identity.principalId
-//     storageAccounts_apdstorageprod_name: storageAccounts_apdstorageprod_name
-//   }
-// }
 
 var appSettings = {
   APPINSIGHTS_INSTRUMENTATIONKEY: applicationInsights_resource.properties.InstrumentationKey
   'AzureAd__ClientId': clientId
   'AzureAd__TenantId' : tenantId
   'AzureAd__Instance': 'https://login.microsoftonline.com/'
-  'AzureAd__Audience': 'api://${appService_resource.properties.defaultHostName}/${clientId}'
+  'AzureAd__Audiences': ['api://${appService_resource.properties.defaultHostName}/${clientId}','${clientId}']
   'AzureStorage__StorageAccountUri': storageAccounts_apdstorageprod_name_resource.properties.primaryEndpoints.table
   'AzureStorage__UsersTableName': 'Users'
   'AzureStorage__AnnouncementsTableName': 'Announcements'
