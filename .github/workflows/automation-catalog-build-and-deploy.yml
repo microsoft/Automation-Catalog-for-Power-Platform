@@ -1,6 +1,6 @@
 # File: .github/workflows/workflow.yml
-# test
-name: Run Azure Login with OIDC
+
+name: Build and Deploy Automation Catalog
 on: 
   push:
     branches: 
@@ -46,17 +46,17 @@ jobs:
           name: DeployResources
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          resource-group-name: ah-catalog-test
+          resource-group-name: ${{vars.RESOURCEGROUPNAME}}
           template-file: AutomationCatalogForPowerPlatform/ACPP.Infrastructure/template.bicep
           parameters: |
             clientId: ${{ secrets.AZURE_CLIENT_ID }}
             tenantId: ${{ secrets.AZURE_TENANT_ID }}
-            appService: appService-sg-1
-            appServicePlan: appServicePlan-sg-1
-            storageAccount: storageaccsg1
-            applicationInsights: AiSg1
-            catalogPublisherId: fb31ecb7-e51e-f011-998a-000d3a8040d2
-            catalogEnvUrl: https://org028f6349.api.crm5.dynamics.com/
+            appService: ${{ vars.APPSERVICE }}
+            appServicePlan: ${{ vars.APPSERVICEPLAN }}
+            storageAccount: ${{ vars.STORAGEACCOUNT }}
+            applicationInsights: ${{ vars.APPLICATIONINSIGHTS }}
+            catalogPublisherId: ${{ vars.CATALOG_PUBLISHER_ID }}
+            catalogEnvUrl: ${{ vars.CATALOG_ENV_URL }}
 
             
   build-api:
