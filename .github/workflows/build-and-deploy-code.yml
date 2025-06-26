@@ -1,64 +1,14 @@
-# File: .github/workflows/workflow.yml
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
 
 name: Build and Deploy Automation Catalog
 on: 
-  push:
-    branches: 
-      - main
-  workflow_dispatch:
-    inputs:
-      deployResources:
-        description: 'Deploy Azure Resources'
-        type: boolean
-        required: false
+  workflow_dispatch
 
 permissions:
   id-token: write
   contents: read
-jobs:
-  build-and-deploy:
-    runs-on: windows-latest
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.deployResources == 'true'
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Login
-        uses: azure/login@v2
-        with:
-          client-id: ${{ secrets.AZURE_FIC_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          allow-no-subscriptions: true
-          enable-AzPSSession: true
-
-      - name: Create Resource Group
-        run: |
-          az group create --name ah-catalog-test --location eastus
-            
-      - name: Azure Resource Manager Deployment
-        id: deployment
-        uses: azure/bicep-deploy@v2
-        with:
-          type: deployment
-          operation: create
-          scope: resourceGroup
-          name: DeployResources
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          resource-group-name: ${{vars.RESOURCEGROUPNAME}}
-          template-file: AutomationCatalogForPowerPlatform/ACPP.Infrastructure/template.bicep
-          parameters: |
-            clientId: ${{ secrets.AZURE_CLIENT_ID }}
-            tenantId: ${{ secrets.AZURE_TENANT_ID }}
-            appService: ${{ vars.APPSERVICE }}
-            appServicePlan: ${{ vars.APPSERVICEPLAN }}
-            storageAccount: ${{ vars.STORAGEACCOUNT }}
-            applicationInsights: ${{ vars.APPLICATIONINSIGHTS }}
-            catalogPublisherId: ${{ vars.CATALOG_PUBLISHER_ID }}
-            catalogEnvUrl: ${{ vars.CATALOG_ENV_URL }}
-
-            
+jobs:    
   build-api:
     runs-on: windows-latest
     steps:
@@ -107,8 +57,8 @@ jobs:
       - name: Build UI
         run: |
           set REACT_APP_BUILD_ID=${{ github.run_number }}
-          set REACT_APP_TEAMS_APP_ID=${{ vars.TEAMSAPPID }}
           set REACT_APP_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID }}
+          set REACT_APP_TEAMS_APP_ID=${{ vars.TEAMSAPPID }}
           set REACT_APP_DEFAULT_TOKEN_SCOPE=api://${{ vars.APPSERVICE }}.azurewebsites.net/${{ secrets.AZURE_CLIENT_ID }}
           set REACT_APP_ADMIN_ENV=${{ vars.ADMINENVIRONMENT }}
           set REACT_APP_FEEDBACK_FORM_URL=${{ vars.FEEDBACKFORMURL }}
@@ -178,6 +128,3 @@ jobs:
         with:
           app-name: ${{ vars.APPSERVICE }}
           package: ${{ github.workspace }}/dist
-
-
-          
