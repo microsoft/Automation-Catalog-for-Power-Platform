@@ -58,12 +58,31 @@ jobs:
         run: |
           set REACT_APP_BUILD_ID=${{ github.run_number }}
           set REACT_APP_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID }}
-          set REACT_APP_TEAMS_APP_ID=${{ vars.TEAMSAPPID }}
           set REACT_APP_DEFAULT_TOKEN_SCOPE=api://${{ vars.APPSERVICE }}.azurewebsites.net/${{ secrets.AZURE_CLIENT_ID }}
           set REACT_APP_ADMIN_ENV=${{ vars.ADMINENVIRONMENT }}
-          set REACT_APP_FEEDBACK_FORM_URL=${{ vars.FEEDBACKFORMURL }}
-          set REACT_APP_FAQ_URL=${{ vars.FAQURL }}
           set REACT_APP_AI_CONNECTION_STRING=${{ vars.APPINSIGHTSCONNECTIONSTRING }}
+          set TEAMSAPPID=${{ vars.TEAMSAPPID }}
+          set FEEDBACKFORMURL=${{ vars.FEEDBACKFORMURL }}
+          set FAQURL=${{ vars.FAQURL }}
+
+          if "%TEAMSAPPID%"=="TEAMSAPPID_PH" (
+            set REACT_APP_TEAMS_APP_ID=
+          ) else (
+            set REACT_APP_TEAMS_APP_ID=%TEAMSAPPID%
+          )
+
+          if "%FEEDBACKFORMURL%"=="FEEDBACKFORMURL_PH" (
+            set REACT_APP_FEEDBACK_FORM_URL=
+          ) else (
+            set REACT_APP_FEEDBACK_FORM_URL=%FEEDBACKFORMURL%
+          )
+
+          if "%FAQURL%"=="FAQURL_PH" (
+            set REACT_APP_FAQ_URL=
+          ) else (
+            set REACT_APP_FAQ_URL=%FAQURL%
+          )
+
           npm run build:prod
         working-directory: AutomationCatalogForPowerPlatform/ACPP.Client
         env:
