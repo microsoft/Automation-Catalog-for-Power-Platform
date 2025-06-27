@@ -242,7 +242,7 @@ Assign the following role ‘Storage Blob Table Contributor’ to the ‘appServ
 </details>
 
 <details>
-<summary> Configuring GitHub </summary> 
+<summary> Configuring GitHub </summary>
 
 ### 4. Create a resource group 
 Create a resource group in the azure portal. Make note of the name and the location selected. ([Create a resource group](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal#create-resource-groups))
@@ -379,17 +379,17 @@ Give a name to the credential and save it.
 
 <tr>
 <td><b>TEAMSAPPID</b></td>
-<td>Keep this empty. This variable should be set later.</td>
+<td>TEAMSAPPID_PH &lt;This is a placeholder and should be used till a value is set.&gt;</td>
 </tr>
 
 <tr>
 <td><b>FEEDBACKFORMURL</b></td>
-<td>URL to your feedback form</td>
+<td>FEEDBACKFORMURL_PH &lt;This is a placeholder and should be used till a value is set.&gt; <br>URL to your feedback form</td>
 </tr>
 
 <tr>
 <td><b>FAQURL</b></td>
-<td>URL where FAQs are going to be present</td>
+<td>FAQURL_PH &lt;This is a placeholder and should be used till a value is set.&gt; <br>URL where FAQs are going to be present</td>
 </tr>
 
 <tr>
@@ -488,7 +488,7 @@ Open the application insights that got created. Open Configure->Properties and m
 ### 16. Add Pipeline variable (Azure DevOps)
 
 1.	Open the pipeline in Azure DevOps
-2.	Click on variables and update the value the following variable, after publishing the app to teams.
+2.	Click on variables and update the value the following variable, after publishing the app to teams and re-run the pipeline.
 
 <table>
 <tr>
