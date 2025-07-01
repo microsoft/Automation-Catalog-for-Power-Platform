@@ -15,6 +15,7 @@ Add the URL of the required environment in environment variables in your ADO Pip
 Import the CatalogExtension_1_0_1_3.zip present in the repository, in the environment where the catalog is created.
 
 ## Adding A3P templates to Power Catalog (eng)
+Open Power Catalog Manager App. Select Catalog Publishers and create a new publisher. Note the Publisher Name and the Publisher ID. 
 
 Install Pac cli. Use this documentation:  [Microsoft Power Platform CLI - Power Platform | Microsoft Learn](https://learn.microsoft.com/en-us/power-platform/developer/cli/introduction?tabs=windows)
 
