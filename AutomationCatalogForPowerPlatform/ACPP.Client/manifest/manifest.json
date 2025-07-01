@@ -15,7 +15,7 @@
         "outline": "outline.png"
     },
     "name": {
-        "short": "Automation Catalog for Power Platform-${{TEAMSFX_ENV}}",
+        "short": "Automation Catalog-${{TEAMSFX_ENV}}",
         "full": "Automation Catalog for Power Platform"
     },
     "description": {

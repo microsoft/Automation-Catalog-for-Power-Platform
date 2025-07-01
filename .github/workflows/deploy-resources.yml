@@ -1,0 +1,51 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
+name: Deploy Resources
+on: 
+  workflow_dispatch
+
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  build-and-deploy:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_FIC_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          allow-no-subscriptions: true
+          enable-AzPSSession: true
+
+      - name: Create Resource Group
+        run: |
+          az group create --name ${{ vars.RESOURCEGROUPNAME }} --location ${{ vars.LOCATION }}
+            
+      - name: Azure Resource Manager Deployment
+        id: deployment
+        uses: azure/bicep-deploy@v2
+        with:
+          type: deployment
+          operation: create
+          scope: resourceGroup
+          name: DeployResources
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          resource-group-name: ${{ vars.RESOURCEGROUPNAME }}
+          template-file: AutomationCatalogForPowerPlatform/ACPP.Infrastructure/template.bicep
+          parameters: |
+            clientId: ${{ secrets.AZURE_CLIENT_ID }}
+            tenantId: ${{ secrets.AZURE_TENANT_ID }}
+            appService: ${{ vars.APPSERVICE }}
+            appServicePlan: ${{ vars.APPSERVICEPLAN }}
+            storageAccount: ${{ vars.STORAGEACCOUNT }}
+            applicationInsights: ${{ vars.APPLICATIONINSIGHTS }}
+            catalogPublisherId: ${{ vars.CATALOG_PUBLISHER_ID }}
+            catalogEnvUrl: ${{ vars.CATALOG_ENV_URL }}

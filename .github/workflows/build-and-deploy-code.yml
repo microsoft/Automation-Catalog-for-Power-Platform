@@ -1,0 +1,149 @@
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
+name: Build and Deploy Automation Catalog
+on: 
+  workflow_dispatch
+
+permissions:
+  id-token: write
+  contents: read
+jobs:    
+  build-api:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+      
+      - name: Restore dependencies
+        run: dotnet restore AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj
+      
+      - name: Change Directory
+        run: cd AutomationCatalogForPowerPlatform/ACPP.API
+      
+      - name: Build API
+        run: dotnet build AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj --configuration Release --no-restore
+
+      - name: Publish API
+        run: dotnet publish AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj --configuration Release --no-restore --output ${{ github.workspace }}/dropAPI/ACPP.API
+
+      - name: Upload API Artifact
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: dropAPI
+          path: ${{ github.workspace }}/dropAPI
+
+  build-ui:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4.4.0
+        with:
+          node-version: '18.15.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install Packages
+        run: npm install
+        working-directory: AutomationCatalogForPowerPlatform/ACPP.Client
+
+      - name: Build UI
+        run: |
+          set REACT_APP_BUILD_ID=${{ github.run_number }}
+          set REACT_APP_CLIENT_ID=${{ secrets.AZURE_CLIENT_ID }}
+          set REACT_APP_DEFAULT_TOKEN_SCOPE=api://${{ vars.APPSERVICE }}.azurewebsites.net/${{ secrets.AZURE_CLIENT_ID }}
+          set REACT_APP_ADMIN_ENV=${{ vars.ADMINENVIRONMENT }}
+          set REACT_APP_AI_CONNECTION_STRING=${{ vars.APPINSIGHTSCONNECTIONSTRING }}
+          set TEAMSAPPID=${{ vars.TEAMSAPPID }}
+          set FEEDBACKFORMURL=${{ vars.FEEDBACKFORMURL }}
+          set FAQURL=${{ vars.FAQURL }}
+
+          if "%TEAMSAPPID%"=="TEAMSAPPID_PH" (
+            set REACT_APP_TEAMS_APP_ID=
+          ) else (
+            set REACT_APP_TEAMS_APP_ID=%TEAMSAPPID%
+          )
+
+          if "%FEEDBACKFORMURL%"=="FEEDBACKFORMURL_PH" (
+            set REACT_APP_FEEDBACK_FORM_URL=
+          ) else (
+            set REACT_APP_FEEDBACK_FORM_URL=%FEEDBACKFORMURL%
+          )
+
+          if "%FAQURL%"=="FAQURL_PH" (
+            set REACT_APP_FAQ_URL=
+          ) else (
+            set REACT_APP_FAQ_URL=%FAQURL%
+          )
+
+          npm run build:prod
+        working-directory: AutomationCatalogForPowerPlatform/ACPP.Client
+        env:
+          CI: ""
+        shell: cmd
+
+      - name: Copy Locales
+        run: xcopy "src\\i18n\\locales" "build\\static\\locales\\" /e /s /y
+        shell: cmd
+        working-directory: AutomationCatalogForPowerPlatform/ACPP.Client
+
+      - name: Copy files excluding map
+        run: |
+          $source = "AutomationCatalogForPowerPlatform/ACPP.Client/build"
+          $target = "$env:GITHUB_WORKSPACE/dropUI/ACPP.Client/ClientApp"
+          robocopy $source $target /E /XF *.map
+          $exitCode = $LASTEXITCODE
+          if($exitCode -le 7) {
+            exit 0 
+          } else {
+            exit $exitCode
+          }
+        shell: pwsh
+
+      - name: Upload UI Artifact
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: dropUI
+          path: ${{ github.workspace }}/dropUI
+
+  deploy-code:
+    needs: [build-api, build-ui]
+    runs-on: windows-latest
+    steps:
+      - name: Download API Artifact
+        uses: actions/download-artifact@v4.3.0
+        with:
+          name: dropAPI
+          path: dropAPI
+
+      - name: Download UI Artifact
+        uses: actions/download-artifact@v4.3.0
+        with:
+          name: dropUI
+          path: dropUI
+
+      - name: Merge API and UI
+        run: |
+          xcopy "dropAPI\\ACPP.API" "${{ github.workspace }}\\dist" /e /s /i
+          xcopy "dropUI\\ACPP.Client\\ClientApp" "${{ github.workspace }}\\dist\\ClientApp" /e /s /i
+
+      - name: Login
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_FIC_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          allow-no-subscriptions: true
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ vars.APPSERVICE }}
+          package: ${{ github.workspace }}/dist
