@@ -1,4 +1,7 @@
-﻿using ACPP.API.Models;
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
+using ACPP.API.Models;
 using Azure.Data.Tables;
 
 namespace ACPP.API.Extensions
@@ -21,3 +24,4 @@ namespace ACPP.API.Extensions
         }
     }
 }
+

@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import React, { useContext } from 'react';
 import { Button, Card, CardHeader, Image, Subtitle2, mergeClasses } from '@fluentui/react-components';
 import { bundleIcon, ArrowRight20Regular, ArrowRight20Filled } from '@fluentui/react-icons';
@@ -51,3 +54,4 @@ const IdeaSubmission: React.FC<IdeaSubmissionProps> = ({ className }) => {
 };
 
 export default IdeaSubmission;
+

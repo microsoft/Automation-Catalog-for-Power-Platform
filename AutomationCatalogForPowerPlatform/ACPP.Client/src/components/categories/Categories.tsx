@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import React, { useMemo } from 'react';
 
 import { Accordion, AccordionItem, AccordionToggleEventHandler, Subtitle1, mergeClasses } from '@fluentui/react-components';
@@ -60,3 +63,4 @@ const Categories: React.FC<CategoriesProps> = (props: CategoriesProps) => {
 };
 
 export default Categories;
+

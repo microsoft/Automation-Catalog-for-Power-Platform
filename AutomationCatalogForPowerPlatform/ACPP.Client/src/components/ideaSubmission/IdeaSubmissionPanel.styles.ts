@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { makeStyles, shorthands, tokens } from '@fluentui/react-components';
 
 export const useStyles = makeStyles({
@@ -39,3 +42,4 @@ export const useStyles = makeStyles({
     ...shorthands.margin('auto', '10px'),
   },
 });
+

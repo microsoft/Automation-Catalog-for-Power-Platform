@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import React from 'react';
 import { Body1Strong, Button, MenuItemCheckbox, MenuList, Spinner } from '@fluentui/react-components';
 import { useTranslation } from 'react-i18next';
@@ -74,3 +77,4 @@ const FilterCategoryDrawer: React.FC<FilterCategoryBaseProps & FilterCategoryDra
 };
 
 export default React.memo(FilterCategoryDrawer);
+

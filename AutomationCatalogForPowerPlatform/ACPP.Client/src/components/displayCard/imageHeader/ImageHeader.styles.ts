@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { makeStyles, shorthands } from '@fluentui/react-components';
 
 import breakpoints from '../../../common/helpers/Breakpoints';
@@ -28,3 +31,4 @@ export const useStyles = makeStyles({
         ...breakpoints.sm({ display: 'initial' }),
     }
 });
+

@@ -1,4 +1,7 @@
-﻿using System.Security.Claims;
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
+using System.Security.Claims;
 using System.Security.Principal;
 
 namespace ACPP.API.Utilities
@@ -33,3 +36,4 @@ namespace ACPP.API.Utilities
         }
     }
 }
+

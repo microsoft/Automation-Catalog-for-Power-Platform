@@ -1,4 +1,7 @@
-﻿# Set the environment URL
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+
+# Set the environment URL
 $envUrl = Read-Host "Enter value for Org URL"
 
 # Get all subdirectories in the current directory

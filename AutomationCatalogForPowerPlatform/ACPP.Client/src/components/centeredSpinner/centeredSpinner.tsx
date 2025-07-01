@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { Spinner } from "@fluentui/react-components";
 
 export const CenteredSpinner = ({ classNames = "" }) => {

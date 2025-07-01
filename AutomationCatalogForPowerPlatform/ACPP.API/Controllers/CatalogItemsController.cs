@@ -1,4 +1,7 @@
-﻿using ACPP.API.Managers.Interfaces;
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
+using ACPP.API.Managers.Interfaces;
 using ACPP.API.Models;
 using ACPP.API.Utilities;
 using Microsoft.AspNetCore.Authorization;
@@ -67,3 +70,4 @@ namespace ACPP.API.Controllers
         }
     }
 }
+

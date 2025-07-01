@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 param entityPrincipalId string
 param storageAccounts_apdstorageprod_name string
 
@@ -14,3 +17,4 @@ resource roleAssignmentStorageAccount 'Microsoft.Authorization/roleAssignments@2
     principalId: entityPrincipalId
   }
 }
+

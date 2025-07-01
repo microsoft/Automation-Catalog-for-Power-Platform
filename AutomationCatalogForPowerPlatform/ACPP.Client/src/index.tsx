@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { Suspense, useCallback, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import AppContainer from './components/appContainer/AppContainer';
@@ -139,3 +142,4 @@ const Main = () => {
 const container = document.getElementById('root');
 const root = createRoot(container!);
 root.render(<Main />);
+

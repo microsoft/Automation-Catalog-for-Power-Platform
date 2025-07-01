@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { createContext } from 'react';
 import { ITelemetry } from '../models/LoggingServiceTypes';
 
@@ -10,3 +13,4 @@ export const LoggerContext = createContext<{
     trackException: (error: Error, severityLevel?: number, otherData?: ITelemetry) => { },
     setCurrentPage: (currentPage: string) => { }
 });
+

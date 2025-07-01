@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { screen } from '@testing-library/react';
 import { renderWithProviders } from '../../test/test-utils';
 import AboutPage from './AboutPage';
@@ -42,3 +45,4 @@ describe('AboutPage Component', () => {
     expect(dividers.length).toBe(2);
   });
 });
+

@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { IDisplayCanvasProps } from "./IDisplayCanvasProps";
 import { useStyles } from "./DisplayCanvas.styles";
 import {

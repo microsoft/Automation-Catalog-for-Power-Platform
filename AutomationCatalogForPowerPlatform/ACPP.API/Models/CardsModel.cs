@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
+using System.ComponentModel.DataAnnotations;
 
 namespace ACPP.API.Models
 {
@@ -50,3 +53,4 @@ namespace ACPP.API.Models
     }
 
 }
+

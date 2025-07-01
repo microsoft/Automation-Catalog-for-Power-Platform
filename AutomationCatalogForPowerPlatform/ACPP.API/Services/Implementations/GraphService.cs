@@ -1,4 +1,7 @@
-﻿using ACPP.API.Configuration;
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
+using ACPP.API.Configuration;
 using ACPP.API.Models;
 using ACPP.API.Providers.Implementations;
 using ACPP.API.Providers.Interfaces;
@@ -74,3 +77,4 @@ namespace ACPP.API.Services.Implementations
         }
     }
 }
+

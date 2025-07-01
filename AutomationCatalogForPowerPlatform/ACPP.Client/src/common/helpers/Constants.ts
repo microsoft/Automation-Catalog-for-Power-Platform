@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { MessageBarIntent, ToastIntent } from "@fluentui/react-components";
 
 export const EMPTY_STRING = '';

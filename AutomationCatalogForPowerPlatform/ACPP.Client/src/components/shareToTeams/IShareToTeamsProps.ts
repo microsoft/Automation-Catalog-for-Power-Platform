@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 /**
  * Interface for properties of the ShareToTeams component.
  */
@@ -28,3 +31,4 @@ export interface IShareToTeamsProps {
   */
   setShareButtonText: boolean;
 }
+

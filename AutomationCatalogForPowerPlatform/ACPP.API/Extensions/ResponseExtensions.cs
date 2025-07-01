@@ -1,4 +1,7 @@
-﻿using ACPP.API.Constants;
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
+using ACPP.API.Constants;
 using ACPP.API.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -77,3 +80,4 @@ namespace ACPP.API.Extensions
         }
     }
 }
+

@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -123,3 +126,4 @@ const SearchPage: React.FC<ISearchPageProps> = (props: ISearchPageProps) => {
 };
 
 export default React.memo(SearchPage);
+

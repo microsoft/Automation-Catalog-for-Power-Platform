@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { Skeleton, SkeletonItem, Card, CardPreview, mergeClasses } from '@fluentui/react-components';
 import { useStyles } from './CategoriesSkeleton.styles';
 import { useScreenSize } from '../../hooks/useScreenSize';
@@ -34,3 +37,4 @@ export const CategoriesSkeleton = (): JSX.Element => {
     </Skeleton>
   );
 };
+

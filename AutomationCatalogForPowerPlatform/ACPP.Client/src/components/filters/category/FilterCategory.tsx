@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import React, { useMemo, useState } from 'react';
 import {
   Button,
@@ -211,3 +214,4 @@ const FilterCategory: React.FC<FilterCategoryProps> = ({
 };
 
 export default React.memo(FilterCategory);
+

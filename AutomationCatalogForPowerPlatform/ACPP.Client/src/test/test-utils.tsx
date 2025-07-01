@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import i18n from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
 import * as fs from 'fs';

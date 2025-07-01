@@ -1,4 +1,7 @@
-﻿namespace ACPP.API.Cache
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
+namespace ACPP.API.Cache
 {
     public interface IServiceClientMemoryCache
     {

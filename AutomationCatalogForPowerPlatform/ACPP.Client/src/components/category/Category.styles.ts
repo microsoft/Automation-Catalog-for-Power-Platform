@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { makeStyles, shorthands, tokens } from '@fluentui/react-components';
 import breakpoints from '../../common/helpers/Breakpoints';
 import { CATEGORY_CARD_WIDTH_DEFAULT, CATEGORY_CARD_WIDTH_LG, CATEGORY_CARD_WIDTH_XL } from '../../common/helpers/Constants';
@@ -61,3 +64,4 @@ export const useStyles = makeStyles({
     ...shorthands.borderRadius(tokens.borderRadiusSmall),
   },
 });
+

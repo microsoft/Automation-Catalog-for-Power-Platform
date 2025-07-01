@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { makeStyles, shorthands } from '@fluentui/react-components';
 
 export const useStyles = makeStyles({
@@ -22,3 +25,4 @@ export const useStyles = makeStyles({
     marginLeft: '-1.5%'
   }
 });
+

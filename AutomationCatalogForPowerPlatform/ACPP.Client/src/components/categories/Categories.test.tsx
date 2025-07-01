@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 // import { screen } from '@testing-library/react';
 // import { renderWithProviders } from '../../test/test-utils';
 // import Categories from './Categories';

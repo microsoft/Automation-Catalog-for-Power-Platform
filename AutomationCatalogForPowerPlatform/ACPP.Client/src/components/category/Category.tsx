@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import React from 'react';
 
 import { Text, Tooltip } from '@fluentui/react-components';
@@ -30,3 +33,4 @@ const Category: React.FC<CategoryProps> = ({ category, onClick }: CategoryProps)
 };
 
 export default Category;
+

@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 export interface IRootCanvasProps {
 
     // Children to be passed to the Root Canvas component

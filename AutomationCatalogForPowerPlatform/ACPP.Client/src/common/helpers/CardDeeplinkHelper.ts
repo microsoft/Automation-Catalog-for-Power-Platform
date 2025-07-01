@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import config from "../../config";
 
 /**
@@ -18,3 +21,4 @@ export const customParse = (str: string) => {
             return result;
         }, {});
 }  
+

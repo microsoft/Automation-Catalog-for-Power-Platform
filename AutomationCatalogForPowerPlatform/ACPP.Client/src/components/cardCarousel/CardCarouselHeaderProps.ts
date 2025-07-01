@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 /**
  * Represents the properties for the CardCarouselHeader component.
  * @interface CardCarouselHeaderProps
@@ -44,3 +47,4 @@ export interface CardCarouselHeaderProps {
      */
     classname?: string;
 }
+

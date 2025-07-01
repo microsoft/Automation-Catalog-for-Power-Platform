@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import React, { useState } from 'react';
 
 
@@ -20,4 +23,5 @@ function withErrorBoundary(WrappedComponent: React.ComponentType<any>) {
 }
 
 export default withErrorBoundary;
+
 

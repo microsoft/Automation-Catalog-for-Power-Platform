@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import {

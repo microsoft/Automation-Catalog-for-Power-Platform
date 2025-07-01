@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 export interface UserDetails {
     displayName?: string;
     userId?: string;

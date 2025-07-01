@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { createContext } from 'react';
 import { UserDetails } from '../models/UserDetails';
 import { UserCatalogItems } from '../models/UserCatalogItems';
@@ -9,3 +12,4 @@ export const UserContext = createContext<{
     userBasicData: undefined,
     userCatalogItems: undefined,
 });
+

@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 export const mockCategoryData = [
     {
         "categoryTitle": "ADO Management",

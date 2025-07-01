@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { GriffelStyle } from '@griffel/style-types';
 
 export interface CardStylesProps {

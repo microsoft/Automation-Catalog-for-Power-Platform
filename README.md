@@ -1,3 +1,6 @@
+<!-- Copyright (c) Microsoft Corporation.
+ Licensed under the MIT License. -->
+ 
 # Self-hosting Automation Catalog documentation (eng)
 ## Configuring Power Catalog (eng)
 

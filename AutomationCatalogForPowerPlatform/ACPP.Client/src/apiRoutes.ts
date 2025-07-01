@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 export const apiRoutes = {
     getUserDetails: "/api/UserData/GetUserDetails",
     updateLastVisitTime: "/api/UserData/updateLastVisitTime",

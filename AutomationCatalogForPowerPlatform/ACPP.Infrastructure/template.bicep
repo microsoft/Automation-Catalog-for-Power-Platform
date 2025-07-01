@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 @description('App service name')
 param appService string
 
@@ -249,3 +252,4 @@ output appServiceUrl string = appService_resource.properties.defaultHostName
 output storageAccountUrl string = storageAccounts_apdstorageprod_name_resource.properties.primaryEndpoints.table
 output applicationInsightsInstrumentationKey string = applicationInsights_resource.properties.InstrumentationKey
 output appServiceName string = appService_resource.name
+

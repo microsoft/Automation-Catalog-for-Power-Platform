@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { sharing } from '@microsoft/teams-js';
 /**
  * Share the card deeplink to Teams

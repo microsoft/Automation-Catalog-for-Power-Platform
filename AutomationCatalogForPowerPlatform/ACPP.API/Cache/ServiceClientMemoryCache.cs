@@ -1,4 +1,7 @@
-﻿namespace ACPP.API.Cache
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
+namespace ACPP.API.Cache
 {
     using Microsoft.Extensions.Caching.Memory;
     using Microsoft.Extensions.Logging;
@@ -96,3 +99,4 @@
         }
     }
 }
+

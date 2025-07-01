@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 module.exports = {
   transformIgnorePatterns: ['<rootDir>/node_modules/(?!(@ms/centro-hvc-loader|@testing-library/jest-dom))/'],
   collectCoverage: false,
@@ -9,3 +12,4 @@ module.exports = {
     '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
   },
 };
+

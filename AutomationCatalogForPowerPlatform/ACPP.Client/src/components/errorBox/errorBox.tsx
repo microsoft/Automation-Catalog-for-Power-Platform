@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { useStyles } from './errorBox.styles'
 
 export type ErrorProps = {

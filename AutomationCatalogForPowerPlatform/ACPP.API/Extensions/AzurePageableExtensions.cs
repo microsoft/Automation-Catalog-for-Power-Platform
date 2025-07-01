@@ -1,4 +1,7 @@
-﻿using Azure;
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
+using Azure;
 
 namespace ACPP.API.Extensions
 {
@@ -15,3 +18,4 @@ namespace ACPP.API.Extensions
         }
     }
 }
+
