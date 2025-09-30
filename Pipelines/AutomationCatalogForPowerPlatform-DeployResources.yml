@@ -16,116 +16,115 @@ parameters:
     displayName: Deploy Resources
     type: boolean
     default: false
-    stages:
-      - ${{ if eq(parameters.deployResources, true) }}:
-          - stage: DeployResources
-            jobs: 
-              - job: DeployResourcesJob
-                steps:
-                  - task: AzureResourceManagerTemplateDeployment@3
-                    displayName: "deploy resources"
-                    name: deployResources
-                    inputs:
-                      azureResourceManagerConnection: $(serviceConnection)
-                      subscriptionId: $(subscriptionId)
-                      resourceGroupName: $(resourceGroupName)
-                      location: $(location)
-                      action: 'Create Or Update Resource Group'
-                      deploymentScope: 'Resource Group'
-                      csmFile: AutomationCatalogForPowerPlatform/ACPP.Infrastructure/template.bicep
-                      overrideParameters: '-resourceGroupName "$(resourceGroupName)" -clientId "$(clientId)" -tenantId "$(tenantId)" -appService "$(appService)" -appServicePlan "$(appServicePlan)" -storageAccount "$(storageAccount)" -applicationInsights "$(applicationInsights)" -catalogPublisherId "$(catalogPublisherId)" -catalogEnvUrl "$(catalogEnvUrl)"'
-                      deploymentMode: "Incremental"
-                      deploymentOutputs: dataDeploymentOutputs
-                  - task: PowerShell@2
-                    name: SetDeploymentVariables
-                    displayName: 'Set deployment variables'
-                    inputs:
-                      targetType: 'inline'
-                      script: |
-                        $deploymentOutputs = '$(dataDeploymentOutputs)'
-                        Write-Output "Deployment Outputs: $deploymentOutputs"
-      - stage: Build
-        jobs:      
-        - job: API
+stages:
+  - ${{ if eq(parameters.deployResources, true) }}:
+    - stage: DeployResources
+      jobs: 
+        - job: DeployResourcesJob
           steps:
-          - task: DotNetCoreCLI@2
-            displayName: Build
-            inputs:
-              command: 'build'
-              projects: 'AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj'
-              arguments: '--configuration $(buildConfiguration)'
-          - task: DotNetCoreCLI@2
-            displayName: Publish
-            inputs:
-              command: 'publish'
-              publishWebProjects: false
-              projects: 'AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj'
-              arguments: '--configuration $(buildConfiguration) --output "$(build.artifactstagingdirectory)"'
-              zipAfterPublish: false
-          - task: PublishBuildArtifacts@1
-            inputs:
-              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-              ArtifactName: dropAPI
-
-        - job: UI
-          steps:
-          - task: NodeTool@0
-            displayName: Install Node
-            inputs:
-              versionSource: 'spec'
-              versionSpec: '18.15.x'
-          - task: Npm@1
-            displayName: Install Packages
-            inputs:
-              command: 'install'
-              workingDir: 'AutomationCatalogForPowerPlatform/ACPP.Client'
-          - task: CmdLine@2
-            displayName: Build
-            inputs:
-              script: 'SET REACT_APP_BUILD_ID=$(Build.BuildNumber)&&SET REACT_APP_TEAMS_APP_ID=$(teamsAppId)&&SET REACT_APP_CLIENT_ID=$(clientId)&&SET REACT_APP_DEFAULT_TOKEN_SCOPE=api://$(appService).azurewebsites.net/$(clientId)&&SET REACT_APP_ADMIN_ENV=$(adminEnvironment)&&SET REACT_APP_FEEDBACK_FORM_URL=$(feedBackFormUrl)&&SET REACT_APP_FAQ_URL=$(faqUrl)&&SET REACT_APP_AI_CONNECTION_STRING=$(AppInsightsConnectionString)&&npm run build:prod'
-              workingDirectory: 'AutomationCatalogForPowerPlatform/ACPP.Client'
-          - task: CmdLine@2
-            displayName: Copy locales (temp)
-            inputs:
-              script: 'xcopy "src\i18n\locales" "build\static\locales\" /e /s /y'
-              workingDirectory: 'AutomationCatalogForPowerPlatform/ACPP.Client'
-          - task: CopyFiles@2
-            displayName: Copy files
-            inputs:
-              SourceFolder: 'AutomationCatalogForPowerPlatform/ACPP.Client/build'
-              Contents: |
-                **
-                !**\*.map
-              TargetFolder: '$(Build.ArtifactStagingDirectory)/ACPP.Client/ClientApp'
-          - task: PublishBuildArtifacts@1
-            inputs:
-              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-              ArtifactName: dropUI
-      
-      - stage: DeployCode
-        dependsOn: 
-        - Build
-        condition: succeeded('Build')
-        jobs:
-          - deployment: Deploy
-            displayName: Deploy
-            environment: $(environment)
-            strategy:
-              runOnce:
-                deploy:
-                  steps:
-                  - task: CmdLine@2
-                    displayName: Merge API and UI
-                    inputs:
-                      script: |
-                        xcopy "$(Pipeline.Workspace)\dropAPI\ACPP.API" "$(Build.ArtifactStagingDirectory)\dist\" /e /s 
-                        xcopy "$(Pipeline.Workspace)\dropUI\ACPP.Client\ClientApp" "$(Build.ArtifactStagingDirectory)\dist\ClientApp\" /e /s
-                      workingDirectory: '$(Pipeline.Workspace)'
-                  - task: AzureRmWebAppDeployment@4
-                    displayName: Deploy to Web App
-                    inputs:
-                      ConnectionType: 'AzureRM'
-                      azureSubscription: $(serviceConnection)
-                      appType: 'webApp'
-                      WebAppName: $(appService)
-                      packageForLinux: '$(Build.ArtifactStagingDirectory)/dist'
+            - task: AzureResourceManagerTemplateDeployment@3
+              displayName: "deploy resources"
+              name: deployResources
+              inputs:
+                azureResourceManagerConnection: $(serviceConnection)
+                subscriptionId: $(subscriptionId)
+                resourceGroupName: $(resourceGroupName)
+                location: $(location)
+                action: 'Create Or Update Resource Group'
+                deploymentScope: 'Resource Group'
+                csmFile: AutomationCatalogForPowerPlatform/ACPP.Infrastructure/template.bicep
+                overrideParameters: '-resourceGroupName "$(resourceGroupName)" -clientId "$(clientId)" -tenantId "$(tenantId)" -appService "$(appService)" -appServicePlan "$(appServicePlan)" -storageAccount "$(storageAccount)" -applicationInsights "$(applicationInsights)" -catalogPublisherId "$(catalogPublisherId)" -catalogEnvUrl "$(catalogEnvUrl)"'
+                deploymentMode: "Incremental"
+                deploymentOutputs: dataDeploymentOutputs
+            - task: PowerShell@2
+              name: SetDeploymentVariables
+              displayName: 'Set deployment variables'
+              inputs:
+                targetType: 'inline'
+                script: |
+                  $deploymentOutputs = '$(dataDeploymentOutputs)'
+                  Write-Output "Deployment Outputs: $deploymentOutputs"
+  - stage: Build
+    jobs:      
+    - job: API
+      steps:
+      - task: DotNetCoreCLI@2
+        displayName: Build
+        inputs:
+          command: 'build'
+          projects: 'AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj'
+          arguments: '--configuration $(buildConfiguration)'
+      - task: DotNetCoreCLI@2
+        displayName: Publish
+        inputs:
+          command: 'publish'
+          publishWebProjects: false
+          projects: 'AutomationCatalogForPowerPlatform/ACPP.API/ACPP.API.csproj'
+          arguments: '--configuration $(buildConfiguration) --output "$(build.artifactstagingdirectory)"'
+          zipAfterPublish: false
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+          ArtifactName: dropAPI
+    - job: UI
+      steps:
+      - task: NodeTool@0
+        displayName: Install Node
+        inputs:
+          versionSource: 'spec'
+          versionSpec: '18.15.x'
+      - task: Npm@1
+        displayName: Install Packages
+        inputs:
+          command: 'install'
+          workingDir: 'AutomationCatalogForPowerPlatform/ACPP.Client'
+      - task: CmdLine@2
+        displayName: Build
+        inputs:
+          script: 'SET REACT_APP_BUILD_ID=$(Build.BuildNumber)&&SET REACT_APP_TEAMS_APP_ID=$(teamsAppId)&&SET REACT_APP_CLIENT_ID=$(clientId)&&SET REACT_APP_DEFAULT_TOKEN_SCOPE=api://$(appService).azurewebsites.net/$(clientId)&&SET REACT_APP_ADMIN_ENV=$(adminEnvironment)&&SET REACT_APP_FEEDBACK_FORM_URL=$(feedBackFormUrl)&&SET REACT_APP_FAQ_URL=$(faqUrl)&&SET REACT_APP_AI_CONNECTION_STRING=$(AppInsightsConnectionString)&&npm run build:prod'
+          workingDirectory: 'AutomationCatalogForPowerPlatform/ACPP.Client'
+      - task: CmdLine@2
+        displayName: Copy locales (temp)
+        inputs:
+          script: 'xcopy "src\i18n\locales" "build\static\locales\" /e /s /y'
+          workingDirectory: 'AutomationCatalogForPowerPlatform/ACPP.Client'
+      - task: CopyFiles@2
+        displayName: Copy files
+        inputs:
+          SourceFolder: 'AutomationCatalogForPowerPlatform/ACPP.Client/build'
+          Contents: |
+            **
+            !**\*.map
+          TargetFolder: '$(Build.ArtifactStagingDirectory)/ACPP.Client/ClientApp'
+      - task: PublishBuildArtifacts@1
+        inputs:
+          PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+          ArtifactName: dropUI
+  
+  - stage: DeployCode
+    dependsOn: 
+    - Build
+    condition: succeeded('Build')
+    jobs:
+      - deployment: Deploy
+        displayName: Deploy
+        environment: $(environment)
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+              - task: CmdLine@2
+                displayName: Merge API and UI
+                inputs:
+                  script: |
+                    xcopy "$(Pipeline.Workspace)\dropAPI\ACPP.API" "$(Build.ArtifactStagingDirectory)\dist\" /e /s 
+                    xcopy "$(Pipeline.Workspace)\dropUI\ACPP.Client\ClientApp" "$(Build.ArtifactStagingDirectory)\dist\ClientApp\" /e /s
+                  workingDirectory: '$(Pipeline.Workspace)'
+              - task: AzureRmWebAppDeployment@4
+                displayName: Deploy to Web App
+                inputs:
+                  ConnectionType: 'AzureRM'
+                  azureSubscription: $(serviceConnection)
+                  appType: 'webApp'
+                  WebAppName: $(appService)
+                  packageForLinux: '$(Build.ArtifactStagingDirectory)/dist'
