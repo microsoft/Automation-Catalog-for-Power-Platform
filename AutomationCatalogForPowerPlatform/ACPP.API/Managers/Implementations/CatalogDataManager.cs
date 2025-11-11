@@ -32,10 +32,10 @@ namespace ACPP.API.Managers.Implementations
         {
             try
             {
-                string[] scopes = new[] { $"{envUrl ?? _configuration.CatalogEnvUrl}/{_configuration.TokenScope}" };
+                string[] scopes = new[] { $"{_configuration.CatalogEnvUrl}/{_configuration.TokenScope}" };
                 string token = await GetTokenForCatalog(scopes);
                 string filterQuery = "statecode eq 0 and statuscode eq 526430000";
-                string listItemsUrl = $"{envUrl ?? _configuration.CatalogEnvUrl}/{_configuration.ListItemsEndpoint}/?$filter={filterQuery}";
+                string listItemsUrl = $"{_configuration.CatalogEnvUrl}/{_configuration.ListItemsEndpoint}/?$filter={filterQuery}";
                 HttpClient client = _httpClientFactory.CreateClient();
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, listItemsUrl);
                 request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
@@ -68,7 +68,7 @@ namespace ACPP.API.Managers.Implementations
             try
             {
                 string selectQuery = "_mspcat_catalogitem_value,mspcat_image,mspcat_imagesize";
-                string listItemsUrl = $"{envUrl ?? _configuration.CatalogEnvUrl}/{_configuration.ListCatalogItemFilesEndpoint}/?$select={selectQuery}";
+                string listItemsUrl = $"{_configuration.CatalogEnvUrl}/{_configuration.ListCatalogItemFilesEndpoint}/?$select={selectQuery}";
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, listItemsUrl);
                 request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 HttpResponseMessage response = await client.SendAsync(request);
@@ -183,10 +183,10 @@ namespace ACPP.API.Managers.Implementations
         {
             try
             {
-                string[] scopes = new[] { $"{envUrl ?? _configuration.CatalogEnvUrl}/{_configuration.TokenScope}" };
+                string[] scopes = new[] { $"{_configuration.CatalogEnvUrl}/{_configuration.TokenScope}" };
                 string token = await GetTokenForCatalog(scopes);
                 string filterQuery = "azureactivedirectoryobjectid eq " + userId + " &$select=systemuserid";
-                string systemUserIdUrl = $"{envUrl ?? _configuration.CatalogEnvUrl}/{_configuration.SystemUsersEndpoint}/?$filter={filterQuery}";
+                string systemUserIdUrl = $"{_configuration.CatalogEnvUrl}/{_configuration.SystemUsersEndpoint}/?$filter={filterQuery}";
                 HttpClient client = _httpClientFactory.CreateClient();
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, systemUserIdUrl);
                 request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
@@ -211,7 +211,7 @@ namespace ACPP.API.Managers.Implementations
         {
             try
             {
-                string[] scopes = new[] { $"{envUrl ?? _configuration.CatalogEnvUrl}/{_configuration.TokenScope}" };
+                string[] scopes = new[] { $"{_configuration.CatalogEnvUrl}/{_configuration.TokenScope}" };
                 string token = await GetTokenForCatalog(scopes);
                 string queryParameters = $"/?$select=_mspcat_catalogitem_value,createdon,mspcat_templatesuffixid,mspcat_settings,mspcat_environmenturl&$expand=mspcat_CatalogItem&$filter=statuscode eq 526430003 and _mspcat_publisher_value eq {_configuration.PublisherId} and _owninguser_value eq {systemuserid}";
                 var value = await makeHttpCall(_configuration.TokenScope, token, queryParameters, _configuration.CatalogEnvUrl, _configuration.InstallHistoriesEndPoint, true);
