@@ -11,7 +11,7 @@ export const mockCarouselCards: Card[] = [
         cardLongDescription: "Daily Consolidated Task List will help bring all your tasks into one consolidated list and help you book focus time to complete them. Based on your configuration, you will receive a daily email with a list of your overdue tasks, tasks due today, upcoming tasks, and old tasks without due dates. You can then schedule focus time from the daily email or have it automatically scheduled for you based on your preferences. Each scheduled event will include that day’s consolidated task list in the event details.",
         cardCategory: "Email Management",
         automationUrl: "https://make.preview.powerautomate.com/galleries/public/templates/fea1532598b444dc93bf5b4f11852ebd/?powerautomate-core.enableVariableEditor=true&environment=839eace6-59ab-4243-97ec-a5b8fcc104e4",
-        cardIconUrl: "https://imageassetssa.z5.web.core.windows.net/images/task.png",
+        cardIconUrl: "https://brave-river-0b812d61e.3.azurestaticapps.net/images/task.png",
         cardType: "Automation",
         templateId: "fea1532598b444dc93bf5b4f11852ebd",
         cardDisplayOrder: 1,
@@ -23,7 +23,7 @@ export const mockCarouselCards: Card[] = [
         isNew: true,
         isFeatured: true,
         cardTimeSavingsUnit: 'min',
-        cardImageUrl: "https://imageassetssa.z5.web.core.windows.net/images/detailedViewPlaceholder.png",
+        cardImageUrl: "https://brave-river-0b812d61e.3.azurestaticapps.net/images/detailedViewPlaceholder.png",
         cardVideoUrl: ""
     },
     {
@@ -33,7 +33,7 @@ export const mockCarouselCards: Card[] = [
         cardLongDescription: "Daily Consolidated Task List will help bring all your tasks into one consolidated list and help you book focus time to complete them. Based on your configuration, you will receive a daily email with a list of your overdue tasks, tasks due today, upcoming tasks, and old tasks without due dates. You can then schedule focus time from the daily email or have it automatically scheduled for you based on your preferences. Each scheduled event will include that day’s consolidated task list in the event details.",
         cardCategory: "Email Management",
         automationUrl: "https://make.preview.powerautomate.com/galleries/public/templates/fea1532598b444dc93bf5b4f11852ebd/?powerautomate-core.enableVariableEditor=true&environment=839eace6-59ab-4243-97ec-a5b8fcc104e4",
-        cardIconUrl: "https://imageassetssa.z5.web.core.windows.net/images/task.png",
+        cardIconUrl: "https://brave-river-0b812d61e.3.azurestaticapps.net/images/task.png",
         cardType: "Automation",
         templateId: "fea1532598b444dc93bf5b4f11852ebd",
         cardDisplayOrder: 1,
@@ -45,7 +45,7 @@ export const mockCarouselCards: Card[] = [
         isNew: true,
         isFeatured: true,
         cardTimeSavingsUnit: 'min',
-        cardImageUrl: "https://imageassetssa.z5.web.core.windows.net/images/detailedViewPlaceholder.png",
+        cardImageUrl: "https://brave-river-0b812d61e.3.azurestaticapps.net/images/detailedViewPlaceholder.png",
         cardVideoUrl: ""
     },
     {
@@ -55,7 +55,7 @@ export const mockCarouselCards: Card[] = [
         cardLongDescription: "Daily Consolidated Task List will help bring all your tasks into one consolidated list and help you book focus time to complete them. Based on your configuration, you will receive a daily email with a list of your overdue tasks, tasks due today, upcoming tasks, and old tasks without due dates. You can then schedule focus time from the daily email or have it automatically scheduled for you based on your preferences. Each scheduled event will include that day’s consolidated task list in the event details.",
         cardCategory: "Email Management",
         automationUrl: "https://make.preview.powerautomate.com/galleries/public/templates/fea1532598b444dc93bf5b4f11852ebd/?powerautomate-core.enableVariableEditor=true&environment=839eace6-59ab-4243-97ec-a5b8fcc104e4",
-        cardIconUrl: "https://imageassetssa.z5.web.core.windows.net/images/task.png",
+        cardIconUrl: "https://brave-river-0b812d61e.3.azurestaticapps.net/images/task.png",
         cardType: "Automation",
         templateId: "fea1532598b444dc93bf5b4f11852ebd",
         cardDisplayOrder: 1,
@@ -67,7 +67,7 @@ export const mockCarouselCards: Card[] = [
         isNew: true,
         isFeatured: true,
         cardTimeSavingsUnit: 'min',
-        cardImageUrl: "https://imageassetssa.z5.web.core.windows.net/images/detailedViewPlaceholder.png",
+        cardImageUrl: "https://brave-river-0b812d61e.3.azurestaticapps.net/images/detailedViewPlaceholder.png",
         cardVideoUrl: ""
     },
     {
@@ -77,7 +77,7 @@ export const mockCarouselCards: Card[] = [
         cardLongDescription: "Daily Consolidated Task List will help bring all your tasks into one consolidated list and help you book focus time to complete them. Based on your configuration, you will receive a daily email with a list of your overdue tasks, tasks due today, upcoming tasks, and old tasks without due dates. You can then schedule focus time from the daily email or have it automatically scheduled for you based on your preferences. Each scheduled event will include that day’s consolidated task list in the event details.",
         cardCategory: "Email Management",
         automationUrl: "https://make.preview.powerautomate.com/galleries/public/templates/fea1532598b444dc93bf5b4f11852ebd/?powerautomate-core.enableVariableEditor=true&environment=839eace6-59ab-4243-97ec-a5b8fcc104e4",
-        cardIconUrl: "https://imageassetssa.z5.web.core.windows.net/images/task.png",
+        cardIconUrl: "https://brave-river-0b812d61e.3.azurestaticapps.net/images/task.png",
         cardType: "Automation",
         templateId: "fea1532598b444dc93bf5b4f11852ebd",
         cardDisplayOrder: 1,
@@ -89,7 +89,7 @@ export const mockCarouselCards: Card[] = [
         isNew: true,
         isFeatured: true,
         cardTimeSavingsUnit: 'min',
-        cardImageUrl: "https://imageassetssa.z5.web.core.windows.net/images/detailedViewPlaceholder.png",
+        cardImageUrl: "https://brave-river-0b812d61e.3.azurestaticapps.net/images/detailedViewPlaceholder.png",
         cardVideoUrl: ""
     },
     {
@@ -99,7 +99,7 @@ export const mockCarouselCards: Card[] = [
         cardLongDescription: "Daily Consolidated Task List will help bring all your tasks into one consolidated list and help you book focus time to complete them. Based on your configuration, you will receive a daily email with a list of your overdue tasks, tasks due today, upcoming tasks, and old tasks without due dates. You can then schedule focus time from the daily email or have it automatically scheduled for you based on your preferences. Each scheduled event will include that day’s consolidated task list in the event details.",
         cardCategory: "Email Management",
         automationUrl: "https://make.preview.powerautomate.com/galleries/public/templates/fea1532598b444dc93bf5b4f11852ebd/?powerautomate-core.enableVariableEditor=true&environment=839eace6-59ab-4243-97ec-a5b8fcc104e4",
-        cardIconUrl: "https://imageassetssa.z5.web.core.windows.net/images/task.png",
+        cardIconUrl: "https://brave-river-0b812d61e.3.azurestaticapps.net/images/task.png",
         cardType: "Automation",
         templateId: "fea1532598b444dc93bf5b4f11852ebd",
         cardDisplayOrder: 1,
@@ -111,7 +111,7 @@ export const mockCarouselCards: Card[] = [
         isNew: true,
         isFeatured: true,
         cardTimeSavingsUnit: 'min',
-        cardImageUrl: "https://imageassetssa.z5.web.core.windows.net/images/detailedViewPlaceholder.png",
+        cardImageUrl: "https://brave-river-0b812d61e.3.azurestaticapps.net/images/detailedViewPlaceholder.png",
         cardVideoUrl: ""
     },
     {
@@ -121,7 +121,7 @@ export const mockCarouselCards: Card[] = [
         cardLongDescription: "Daily Consolidated Task List will help bring all your tasks into one consolidated list and help you book focus time to complete them. Based on your configuration, you will receive a daily email with a list of your overdue tasks, tasks due today, upcoming tasks, and old tasks without due dates. You can then schedule focus time from the daily email or have it automatically scheduled for you based on your preferences. Each scheduled event will include that day’s consolidated task list in the event details.",
         cardCategory: "Email Management",
         automationUrl: "https://make.preview.powerautomate.com/galleries/public/templates/fea1532598b444dc93bf5b4f11852ebd/?powerautomate-core.enableVariableEditor=true&environment=839eace6-59ab-4243-97ec-a5b8fcc104e4",
-        cardIconUrl: "https://imageassetssa.z5.web.core.windows.net/images/task.png",
+        cardIconUrl: "https://brave-river-0b812d61e.3.azurestaticapps.net/images/task.png",
         cardType: "Automation",
         templateId: "fea1532598b444dc93bf5b4f11852ebd",
         cardDisplayOrder: 1,
@@ -133,7 +133,7 @@ export const mockCarouselCards: Card[] = [
         isNew: true,
         isFeatured: true,
         cardTimeSavingsUnit: 'min',
-        cardImageUrl: "https://imageassetssa.z5.web.core.windows.net/images/detailedViewPlaceholder.png",
+        cardImageUrl: "https://brave-river-0b812d61e.3.azurestaticapps.net/images/detailedViewPlaceholder.png",
         cardVideoUrl: ""
     },
     {
@@ -143,7 +143,7 @@ export const mockCarouselCards: Card[] = [
         cardLongDescription: "Daily Consolidated Task List will help bring all your tasks into one consolidated list and help you book focus time to complete them. Based on your configuration, you will receive a daily email with a list of your overdue tasks, tasks due today, upcoming tasks, and old tasks without due dates. You can then schedule focus time from the daily email or have it automatically scheduled for you based on your preferences. Each scheduled event will include that day’s consolidated task list in the event details.",
         cardCategory: "Email Management",
         automationUrl: "https://make.preview.powerautomate.com/galleries/public/templates/fea1532598b444dc93bf5b4f11852ebd/?powerautomate-core.enableVariableEditor=true&environment=839eace6-59ab-4243-97ec-a5b8fcc104e4",
-        cardIconUrl: "https://imageassetssa.z5.web.core.windows.net/images/task.png",
+        cardIconUrl: "https://brave-river-0b812d61e.3.azurestaticapps.net/images/task.png",
         cardType: "Automation",
         templateId: "fea1532598b444dc93bf5b4f11852ebd",
         cardDisplayOrder: 1,
@@ -155,7 +155,7 @@ export const mockCarouselCards: Card[] = [
         isNew: true,
         isFeatured: true,
         cardTimeSavingsUnit: 'min',
-        cardImageUrl: "https://imageassetssa.z5.web.core.windows.net/images/detailedViewPlaceholder.png",
+        cardImageUrl: "https://brave-river-0b812d61e.3.azurestaticapps.net/images/detailedViewPlaceholder.png",
         cardVideoUrl: ""
     },
     {
@@ -165,7 +165,7 @@ export const mockCarouselCards: Card[] = [
         cardLongDescription: "Daily Consolidated Task List will help bring all your tasks into one consolidated list and help you book focus time to complete them. Based on your configuration, you will receive a daily email with a list of your overdue tasks, tasks due today, upcoming tasks, and old tasks without due dates. You can then schedule focus time from the daily email or have it automatically scheduled for you based on your preferences. Each scheduled event will include that day’s consolidated task list in the event details.",
         cardCategory: "Email Management",
         automationUrl: "https://make.preview.powerautomate.com/galleries/public/templates/fea1532598b444dc93bf5b4f11852ebd/?powerautomate-core.enableVariableEditor=true&environment=839eace6-59ab-4243-97ec-a5b8fcc104e4",
-        cardIconUrl: "https://imageassetssa.z5.web.core.windows.net/images/task.png",
+        cardIconUrl: "https://brave-river-0b812d61e.3.azurestaticapps.net/images/task.png",
         cardType: "Automation",
         templateId: "fea1532598b444dc93bf5b4f11852ebd",
         cardDisplayOrder: 1,
@@ -177,7 +177,7 @@ export const mockCarouselCards: Card[] = [
         isNew: true,
         isFeatured: true,
         cardTimeSavingsUnit: 'min',
-        cardImageUrl: "https://imageassetssa.z5.web.core.windows.net/images/detailedViewPlaceholder.png",
+        cardImageUrl: "https://brave-river-0b812d61e.3.azurestaticapps.net/images/detailedViewPlaceholder.png",
         cardVideoUrl: ""
     }
 ]
