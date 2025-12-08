@@ -7,8 +7,8 @@ const appConfig = {
   privacyPolicyLink: 'https://privacy.microsoft.com/en-US/data-privacy-notice',
   termsOfUseLink: 'https://www.microsoft.com/en-us/servicesagreement',
   localizationPath: "/StaticContent/hometab/static/locales/{{lng}}/{{ns}}.json",
-  shareIdeasImageUrl: "https://imageassetssa.z5.web.core.windows.net/images/V2.0/ShareIdeas.png",
-  ahLogo: "https://imageassetssa.z5.web.core.windows.net/images/V2.0/ahLogo.png",
+  shareIdeasImageUrl: "https://brave-river-0b812d61e.3.azurestaticapps.net/images/V2.0/ShareIdeas.png",
+  ahLogo: "https://brave-river-0b812d61e.3.azurestaticapps.net/images/V2.0/ahLogo.png",
   catalogInstallUrl: (catalogItemId: string, pdeId: string) =>
     `https://make.preview.powerapps.com/environments/${pdeId}/catalog?autoPopupCardId=${catalogItemId}&powerappsConnections.enableCustomInputControls=true
 &powerappsPortal.enableAdditionalEnvironmentVariableOptions=true&powerappsPortal.enableOutlookTypeEnvironmentVariables=true

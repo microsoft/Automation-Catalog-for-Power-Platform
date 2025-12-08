@@ -30,9 +30,9 @@ namespace ACPP.API.Extensions
                 CardTimeSavings = double.Parse(cards.GetString("TimeSaved")),
                 CardTimeSavingsUnit = "mins",
                 IsNew = cards.GetBoolean("IsNew") ?? false,
-                CardImageUrl = cards.GetString("CardImageUrl") ?? "https://imageassetssa.z5.web.core.windows.net/images/detailedViewPlaceholder.png",
+                CardImageUrl = cards.GetString("CardImageUrl") ?? "https://brave-river-0b812d61e.3.azurestaticapps.net/images/detailedViewPlaceholder.png",
                 CardVideoUrl = cards.GetString("CardVideoUrl"),
-                CardIconUrl = cards.GetString("CardIconUrl") ?? "https://imageassetssa.z5.web.core.windows.net/images/task.png",
+                CardIconUrl = cards.GetString("CardIconUrl") ?? "https://brave-river-0b812d61e.3.azurestaticapps.net/images/task.png",
                 TeamsCardDeeplink = cards.GetString("TeamsCardDeeplink")
             }).OrderBy(x => x.CardDisplayOrder).ToList();
             return cardsDTO;

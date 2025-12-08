@@ -19,7 +19,7 @@ namespace ACPP.API.Models
         [JsonProperty("mspcat_description")]
         public string CardDescription { get; set; }
 
-        private string _cardImageUrl = "https://imageassetssa.z5.web.core.windows.net/images/detailedViewPlaceholder.png";
+        private string _cardImageUrl = "https://brave-river-0b812d61e.3.azurestaticapps.net/images/detailedViewPlaceholder.png";
         public string CardImageUrl
         {
             get => _cardImageUrl;
@@ -28,7 +28,7 @@ namespace ACPP.API.Models
 
         public string CardVideoUrl { get; set; }
 
-        private string _cardIconUrl = "https://imageassetssa.z5.web.core.windows.net/images/task.png";
+        private string _cardIconUrl = "https://brave-river-0b812d61e.3.azurestaticapps.net/images/task.png";
         public string CardIconUrl { 
             get => _cardIconUrl;
             set => _cardIconUrl = value;

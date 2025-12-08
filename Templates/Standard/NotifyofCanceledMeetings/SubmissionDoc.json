@@ -34,11 +34,11 @@
             },
             "small48x48Image": {
                 "name": "Small48Image",
-                "fileSasLink": "https://imageassetssa.z5.web.core.windows.net/images/calendar.png"      
+                "fileSasLink": "https://brave-river-0b812d61e.3.azurestaticapps.net/images/calendar.png"      
              },
              "screenshots": [{
                 "name": "Large216image2",
-                "fileSasLink": "https://imageassetssa.z5.web.core.windows.net/images/Carousel2.jpg"
+                "fileSasLink": "https://brave-river-0b812d61e.3.azurestaticapps.net/images/Carousel2.jpg"
              }]
         }
     }
