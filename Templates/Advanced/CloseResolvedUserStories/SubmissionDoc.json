@@ -1,0 +1,41 @@
+{
+    "modelVersion": "1.0.0.0",
+    "sourcePortal": 526430005,
+    "submissionId": "9f991348-2b8f-4ff6-996c-0f6afd40ae29",
+    "operation": "CreateOrUpdate",
+    "businessJustification": "Automation Catalog for Power Platform",
+    "publisherDetails": {
+        "publisherId": "<PUBLISHER ID>",
+        "publisherDisplayName": "<PUBLISHER NAME>",
+        "publisherUpnList": [],
+        "publisherAADGroupOIDS": []
+    },
+    "catalogItemDefinition": {
+        "id": "369362cb-121b-4725-b99e-292dcd92b929",
+        "displayName": "Close Resolved User Stories",
+        "description": "On the last day of the Sprint you will receive and approval request in Microsoft Teams and Outlook to move any resolved user stories to the closed state.",
+        "offer": {
+            "type": "Component_Collection",
+            "deploymentType": "Template",
+            "helpLink": "https://www.microsoft.com",
+            "privacyPolicyLink": "https://www.microsoft.com",
+            "legalTerms": "https://www.microsoft.com",
+            "engineeringName": {
+                "firstName": "<FIRST NAME>",
+                "lastName": "<LAST NAME>",
+                "email": "<EMAIL>",
+                "phoneNumber": "<PHONE NUMBER>"
+            },
+            "supportName": {
+                "firstName": "<FIRST NAME>",
+                "lastName": "<LAST NAME>",
+                "email": "<EMAIL>",
+                "phoneNumber": "<PHONE NUMBER>"
+            },
+            "small48x48Image": {
+                "name": "Small48Image",
+                "fileSasLink": "https://imageassetssa.z5.web.core.windows.net/images/ado.png"      
+             }
+        }
+    }
+}

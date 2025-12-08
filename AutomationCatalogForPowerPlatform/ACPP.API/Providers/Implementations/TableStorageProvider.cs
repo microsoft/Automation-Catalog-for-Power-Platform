@@ -23,7 +23,7 @@ namespace ACPP.API.Providers.Implementations
         {
             _configuration = configuration.Value;
             _logger = logger;
-            _tableServiceClient = new TableServiceClient(new Uri(_configuration.StorageAccountUri), new DefaultAzureCredential());
+            _tableServiceClient = new TableServiceClient(new Uri(_configuration.StorageAccountUri), new ManagedIdentityCredential());
             _usersTableClient = _tableServiceClient.GetTableClient(_configuration.UsersTableName);
             _cardsTableClient = _tableServiceClient.GetTableClient(_configuration.CardsTableName);
             _announcementsTableClient = _tableServiceClient.GetTableClient(_configuration.AnnouncementsTableName);
